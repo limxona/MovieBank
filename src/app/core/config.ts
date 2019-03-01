@@ -1,3 +1,3 @@
 export const Config = {
-    baseUrl: "https://api.themoviedb.org/3/movie/"
+    baseUrl: "https://api.themoviedb.org/3/"
 };

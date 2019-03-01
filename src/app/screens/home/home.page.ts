@@ -1,32 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { Movie } from 'src/app/models/movie';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit  {
+export class HomePage implements OnInit {
 
-  private movieList: Array<Movie> = [];
+  private movieList: Observable<Array<Movie>>;
+  selectedSegment: string = "latest";
   constructor(private movieService: MovieService) {
 
 
   }
 
   ngOnInit(): void {
-    this.getPopularMovies();
-    
+    this.getMovies();
+
   }
 
 
-  getPopularMovies() {
-    this.movieService.getPopularMovies().subscribe(movieList => {
-      this.movieList = movieList;
-      console.log(this.movieList);
-    })
-  } 
- 
+
+  private getMovies() {
+    switch (this.selectedSegment) {
+      case 'latest':
+        this.movieList = this.movieService.getTopRatedMovies();
+        break;
+      case 'popular':
+      this.movieList = this.movieService.getPopularMovies();
+        break;
+      case 'nowPlaying':
+      this.movieList = this.movieService.getTopNowPlayingMovies();
+        break;
+      case 'topRated':
+      this.movieList = this.movieService.getTopRatedMovies();
+        break;
+      case 'upcoming':
+      this.movieList = this.movieService.getTopUpcomingMovies();
+        break;
+      default:
+        break;
+    }
+
+  }
+
 
 }

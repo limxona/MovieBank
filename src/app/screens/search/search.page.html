@@ -1,9 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>search</ion-title>
+    <ion-searchbar placeholder="Search Movie" debounce="1000" showCancelButton cancelButtonText="Cancel" [(ngModel)]="searchText" (ionChange)="searchMovie(searchText)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+
+  <!-- <div class="movie-poster" *ngFor="let movie of movieList | async">
+    <img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}">
+  </div> -->
+  
+
+  <ion-grid>
+      <ion-row *ngFor="let movie of movieListTmp; let i = index;">
+        <ion-col *ngIf="movieListTmp[2*i]">
+            <div class="movie-poster">
+                <img src="https://image.tmdb.org/t/p/w500/{{movieListTmp[2*i].poster_path}}">
+              </div>
+        </ion-col>
+        <ion-col *ngIf="movieListTmp[2*i+1]">
+            <div class="movie-poster">
+                <img src="https://image.tmdb.org/t/p/w500/{{movieListTmp[2*i+1].poster_path}}">
+              </div>
+        </ion-col>
+        <ion-col *ngIf="movieListTmp[2*i+2]">
+            <div class="movie-poster">
+                <img src="https://image.tmdb.org/t/p/w500/{{movieListTmp[2*i+2].poster_path}}">
+              </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
 </ion-content>
