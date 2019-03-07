@@ -1,43 +1,30 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Movies
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div class="segment-content" >
-    <ion-segment [(ngModel)]="selectedSegment" (ionChange)="getMovies()">
-      <ion-segment-button value="latest" >
-        <ion-label>Latest</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="popular" >
-        <ion-label>Top Rated</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="topRated" >
-        <ion-label>Top Rated</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="nowPlaying" >
-        <ion-label>Now Playing</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="upcoming" >
-        <ion-label>Upcoming</ion-label>
-      </ion-segment-button>
-    </ion-segment>
+  <div class="segment-content">
+    <div class="category-content" [ngClass]="{'active': selectedCategory == 'latest'}" (click)="getMovies('latest');">
+      <span>Latest</span>
+    </div>
+    <div class="category-content" [ngClass]="{'active': selectedCategory == 'popular'}" (click)="getMovies('popular');">
+      <span>Popular</span>
+    </div>
+    <div class="category-content" [ngClass]="{'active': selectedCategory == 'topRated'}" (click)="getMovies('topRated');">
+      <span>Top Rated</span>
+    </div>
+    <div class="category-content" [ngClass]="{'active': selectedCategory == 'nowPlaying'}" (click)="getMovies('nowPlaying');">
+      <span>Now Playing</span>
+    </div>
   </div>
 
-  <ion-card *ngFor="let movie of movieList | async">
-    <img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" />
-    <ion-card-header>
-      <ion-card-title>{{movie.title}}</ion-card-title>
-      <ion-card-subtitle>{{movie.popularity}}</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content>
-      {{movie.overview}}
-    </ion-card-content>
-  </ion-card>
+  <div class="movie-poster-card">
+    <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" *ngFor="let movie of movieList | async" />
+  </div> 
   
 </ion-content>

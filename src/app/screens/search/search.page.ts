@@ -16,7 +16,7 @@ export class SearchPage implements OnInit {
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
-    //this.movieList = this.movieService.getTopNowPlayingMovies();
+    // this.movieList = this.movieService.getTopNowPlayingMovies();
     this.movieService.getTopNowPlayingMovies().subscribe(d => {
       this.movieListTmp = d;
       console.log(d);

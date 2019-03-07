@@ -1,5 +1,48 @@
 
 .segment-content {
-    padding: 16px;
-    padding-bottom: 0px;
+    padding: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .category-content {
+        padding: 5px 10px;
+        border-bottom: 3px solid black;
+
+        span {
+            color: white;            
+            font-size: 15px;
+            font-weight: 700;
+        }
+    }
+    .active {
+        border-bottom: 3px solid #cd4851;
+    }
+}
+
+ion-card {
+    background-color: white;
+    --background: white;
+    border: none;
+}
+
+.movie-poster-card {
+    border-radius: 5px;
+    margin: 5px; 
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+
+    img {
+        display: block;
+        width: calc( 50% - 20px);
+        height: 50%;
+        border-radius: 10px;
+        margin: 10px;
+        
+    }
 }
