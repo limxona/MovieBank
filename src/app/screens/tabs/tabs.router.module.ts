@@ -17,6 +17,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'category',
+        children: [
+          {
+            path: '',
+            loadChildren: '../category/category.module#CategoryPageModule'
+          }
+        ]
+      },
+      {
         path: 'search',
         children: [
           {

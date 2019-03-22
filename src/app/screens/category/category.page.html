@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Categories</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="gender-content">
+    <div class="gender-item" *ngFor="let gender of genderList | async">
+      <span>{{gender.name}}</span>
+    </div>
+  </div>
+  
+
+
+</ion-content>

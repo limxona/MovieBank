@@ -3,3 +3,16 @@ ion-row, ion-col, ion-grid {
     margin: 0px;
     padding: 0px;
 }
+
+ion-searchbar {
+   // background-color: black;
+   --cancel-button-color: red !important;
+   --cancel-button-color: blue;
+}
+
+.testo {
+   // background-color: blue;
+    --cancel-button-color: red !important;
+    --background: #3e3e3e;
+    --color: white;
+}
