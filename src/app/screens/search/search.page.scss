@@ -16,3 +16,38 @@ ion-searchbar {
     --background: #3e3e3e;
     --color: white;
 }
+
+.movie-list {
+    .movie-content {
+        width: 100vh;
+        height: 100px;
+        display: flex;
+        border-bottom: 1px solid #3e3e3e;
+
+        .movie-image {
+            width: 70px;
+            height: 100px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .img {
+                width: 50px;
+                height: 75px;
+            }
+        }
+
+        .movie-info {
+            color: white;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            .movie-title {
+                font-size: 13px;
+                font-weight: 700;
+            }
+        }
+
+
+    }
+}

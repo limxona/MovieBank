@@ -24,7 +24,7 @@
   </div>
 
   <div class="movie-poster-card">
-    <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" *ngFor="let movie of movieList | async" />
+    <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" *ngFor="let movie of movieList | async"  [routerLink]="['/tabs/home/movie-detail/', movie.id]" />
   </div> 
-  
+    
 </ion-content>

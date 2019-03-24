@@ -1,0 +1,59 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="movie">{{movie.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+ -->
+<ion-content>
+    <div *ngIf="movie" class="content">
+
+      <div class="movie-header">
+        <div class="movie-backdrop-image">
+            <img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" />  
+        </div>
+
+        <div class="movie-poster">
+            <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" />  
+          </div>
+      </div>
+
+
+      <div class="movie-info">
+        <div class="movie-title">
+          <span>{{movie.title}}</span>
+        </div>
+
+        <div class="overview">
+          <div class=title>
+              <span class="title">Overview</span>
+          </div>
+          <div class="text">
+            <p>{{movie.overview}}</p>
+          </div>
+          
+        </div>
+
+        <div class="cast-and-crew">
+            <div class=title>
+                <span class="title">Cast&Crew</span>
+            </div>
+            <div class="cast-list" *ngIf="castList">
+              <div class="cast-item" *ngFor="let item of castList">
+                <div class="cast-photo">
+                  <img src="https://image.tmdb.org/t/p/w500/{{item.profile_path}}" *ngIf="item.profile_path" />
+                </div>
+                <div class="cast-info">
+                  <span class="cast-name">{{item.name}}</span> <br/>
+                  <span class="cast-character">{{item.character}}</span>
+                </div>
+
+              </div>
+            </div>
+        </div>
+        
+      </div>
+       
+          
+  
+      </div>
+</ion-content>

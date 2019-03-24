@@ -62,7 +62,7 @@ export class MovieService {
       query: searchText
     }
 
-    return this.http.get("search/multi", {params: data}).pipe(
+    return this.http.get("search/movie", {params: data}).pipe(
       map((response: any) => {
         return response.results as Array<Movie>; 
       })
@@ -70,6 +70,24 @@ export class MovieService {
 
   }
 
+  getMovieDetail(movieID: string) {
+    return this.http.get("movie/"+movieID).pipe(
+      map((response: any) => {
+        console.log(response);
+        return response as Movie; 
+      })
+    );
+  }
 
+  getMovieCast(movieID: string) {
+    let url = 'movie/'+movieID+'/credits';
+    return this.http.get(url).pipe(
+      map((response: any) => {
+        console.log(response);
+        return response; 
+      })
+    );
 
+  }
+  
 }

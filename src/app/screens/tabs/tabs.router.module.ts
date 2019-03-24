@@ -13,6 +13,15 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../home/home.module#HomePageModule'
+          },
+          { 
+            path: 'movie-detail/:movieID', 
+            children: [
+              {
+                path: '',
+                loadChildren: '../movie-detail/movie-detail.module#MovieDetailPageModule'
+              }
+            ]
           }
         ]
       },
@@ -31,6 +40,15 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../search/search.module#SearchPageModule'
+          },
+          { 
+            path: 'movie-detail/:movieID', 
+            children: [
+              {
+                path: '',
+                loadChildren: '../movie-detail/movie-detail.module#MovieDetailPageModule'
+              }
+            ]
           }
         ]
       }, 

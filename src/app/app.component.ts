@@ -14,6 +14,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
   ) {
+    this.statusBar.backgroundColorByName("blue")
+    statusBar.backgroundColorByHexString("1573c1");
     this.initializeApp();
   }
 

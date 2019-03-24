@@ -12,13 +12,13 @@ import { GenderService } from 'src/app/services/gender/gender.service';
 export class SearchPage implements OnInit {
 
   searchText: string = '';
-  movieList: Observable<Array<Movie>>;
-  movieListTmp: Array<Movie> = [];
+  //movieList: Observable<Array<Movie>>;
+  movieList: Array<Movie> = [];
   constructor(private movieService: MovieService, private genderService: GenderService) { }
 
   ngOnInit() {
     this.getAllGenders();
-
+    this.searchMovie('test');
   }
 
   getAllGenders() {
@@ -33,7 +33,8 @@ export class SearchPage implements OnInit {
     //this.movieList = this.movieService.searchMovie(search);
 
     this.movieService.searchMovie(search).subscribe(d => {
-      this.movieListTmp = d;
+      this.movieList = d;
+      console.log(d);
     });
 
   }

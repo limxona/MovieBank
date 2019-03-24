@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 /* const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -8,14 +8,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', loadChildren: './screens/tabs/tabs.module#TabsPageModule' },
-  { path: 'search', loadChildren: './screens/search/search.module#SearchPageModule' },
-  { path: 'profile', loadChildren: './screens/profile/profile.module#ProfilePageModule' },
-  { path: 'favorites', loadChildren: './screens/favorites/favorites.module#FavoritesPageModule' },
-  { path: 'category', loadChildren: './screens/category/category.module#CategoryPageModule' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

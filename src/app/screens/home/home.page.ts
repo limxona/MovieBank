@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class HomePage implements OnInit {
 
-  private movieList: Observable<Array<Movie>>;
+  movieList: Observable<Array<Movie>>;
   selectedCategory: string = 'latest';
   constructor(private movieService: MovieService) {
 

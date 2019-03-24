@@ -12,7 +12,6 @@
 
 
 ion-content{
-
     --ion-background-color: rgb(0, 0, 0);
 }
 
@@ -31,6 +30,11 @@ ion-toolbar {
     --color: #cd4851;
     --opacity: 1.0;
 }
+
+.toolbar-background-md, .toolbar-background-ios,.toolbar-background-wp {
+    background-color: white;
+}
+
 
  
   
