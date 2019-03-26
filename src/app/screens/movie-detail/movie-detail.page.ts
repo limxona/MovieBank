@@ -15,21 +15,21 @@ export class MovieDetailPage implements OnInit {
   private movieID: string = "";
   movie: Movie;
   castList: Cast[] = [];
+  similarMovies: Movie[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private movieService: MovieService) { }
 
   ngOnInit() {
     this.movieID = this.activatedRoute.snapshot.paramMap.get('movieID');
-    this.getMovieDetail();
-    this.getMovieCast();
+    setTimeout(() => {
+      this.getMovieDetail();
+      this.getMovieCast();
+      this.getSimilarMovies();
+    }, 500);
+    
   }
 
   getMovieDetail() {
-    
-    /* this.movieService.getMovieDetail(this.movieID).subscribe(d => {
-      console.log(d);
-    }); */
-    //this.movieService.getMovieDetail(this.movieID);
     this.movieService.getMovieDetail(this.movieID).subscribe(d => {
       console.log(d);
       this.movie = d;
@@ -39,8 +39,17 @@ export class MovieDetailPage implements OnInit {
 
   getMovieCast() {
     this.movieService.getMovieCast(this.movieID).subscribe(d => {
-      this.castList = d.cast as Cast[];
+      let tmpCastList = d.cast as Cast[];
+      this.castList = tmpCastList.length > 10 ? tmpCastList.slice(0,10) : tmpCastList;
+
       console.log(this.castList);
+    });
+  }
+
+
+  getSimilarMovies() {
+    this.movieService.getSimilarMovies(this.movieID).subscribe(d => {
+      this.similarMovies = d;
     });
   }
 

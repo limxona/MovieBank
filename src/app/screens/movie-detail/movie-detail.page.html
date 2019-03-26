@@ -5,55 +5,75 @@
 </ion-header>
  -->
 <ion-content>
-    <div *ngIf="movie" class="content">
+  <div *ngIf="movie" class="content">
 
-      <div class="movie-header">
-        <div class="movie-backdrop-image">
-            <img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" />  
-        </div>
-
-        <div class="movie-poster">
-            <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" />  
-          </div>
+    <div class="movie-header">
+      <div class="movie-backdrop-image">
+        <img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" />
       </div>
 
+      <div class="movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" />
+      </div>
+    </div>
 
-      <div class="movie-info">
-        <div class="movie-title">
-          <span>{{movie.title}}</span>
+
+    <div class="movie-info">
+      <div class="movie-title">
+        <span>{{movie.title}}
+          <span class="movie-year">({{movie.release_date | date: 'yyyy'}})</span>
+        </span>
+      </div>
+
+      <!-- <div class="movie-info-">
+        <div class="movie-runtime">
+          <span>{{movie.runtime}}</span>
         </div>
+        <div class="movie-genres">
+          <span *ngFor="let genre of movie.genres">{{genre.name}}</span>
+        </div>
+      </div> -->
 
-        <div class="overview">
+      <div class="overview">
+        <div class=title>
+          <span class="title">Overview</span>
+        </div>
+        <div class="text">
+          <p>{{movie.overview}}</p>
+        </div>
+      </div>
+      <div class="cast-and-crew">
+        <div class=title>
+          <span class="title">Cast&Crew</span>
+        </div>
+        <div class="cast-list" *ngIf="castList">
+          <div class="cast-item" *ngFor="let item of castList">
+            <div class="cast-photo">
+              <img src="https://image.tmdb.org/t/p/w500/{{item.profile_path}}" *ngIf="item.profile_path" />
+            </div>
+            <div class="cast-info">
+              <span class="cast-name">{{item.name}}</span> <br />
+              <span class="cast-character">{{item.character}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="similar-movies">
           <div class=title>
-              <span class="title">Overview</span>
-          </div>
-          <div class="text">
-            <p>{{movie.overview}}</p>
-          </div>
-          
-        </div>
-
-        <div class="cast-and-crew">
-            <div class=title>
-                <span class="title">Cast&Crew</span>
+              <span class="title">Similar Movies</span>
             </div>
-            <div class="cast-list" *ngIf="castList">
-              <div class="cast-item" *ngFor="let item of castList">
-                <div class="cast-photo">
-                  <img src="https://image.tmdb.org/t/p/w500/{{item.profile_path}}" *ngIf="item.profile_path" />
-                </div>
-                <div class="cast-info">
-                  <span class="cast-name">{{item.name}}</span> <br/>
-                  <span class="cast-character">{{item.character}}</span>
-                </div>
-
+        <div class="content">
+            <div class="movie" *ngFor="let movie of similarMovies">
+              <div class="movie-poster" >
+                  <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" [routerLink]="['/tabs/home/movie-detail/', movie.id]" />
               </div>
-            </div>
+              </div>
         </div>
         
       </div>
-       
-          
-  
-      </div>
+
+
+    </div>
+  </div>
 </ion-content>

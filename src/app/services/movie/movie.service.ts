@@ -87,7 +87,16 @@ export class MovieService {
         return response; 
       })
     );
+  }
 
+  getSimilarMovies(movieID: string) {
+    let url = 'movie/'+movieID+'/similar';
+    return this.http.get(url).pipe(
+      map((response: any) => {
+        console.log(response);
+        return response.results as Array<Movie>; 
+      })
+    );
   }
   
 }
