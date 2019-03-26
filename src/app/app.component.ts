@@ -14,14 +14,15 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
   ) {
-    this.statusBar.backgroundColorByName("blue")
-    statusBar.backgroundColorByHexString("1573c1");
+    
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.styleLightContent();
+      //this.statusBar.backgroundColorByName("blue")
+      //this.statusBar.backgroundColorByHexString("1573c1");
       this.splashScreen.hide();
     });
   }

@@ -46,6 +46,28 @@
                 }
             }
         }
+
+        .movie-info-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px;
+            margin-bottom: 0px;
+            font-size: 0.9em;
+            color: #b1b1b1;
+
+            .movie-runtime {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                ion-icon {
+                    margin-right: 5px;
+                }
+            }
+
+
+        }
         .overview {
             padding: 30px 20px 20px 20px;
 
@@ -56,6 +78,7 @@
             .text {
                 font-size: 1em;
                 line-height: 1.4em;
+                color: #b1b1b1;
             }
         }
         .cast-and-crew {
@@ -109,6 +132,7 @@
                         .cast-character {
                             font-size: 12px; 
                             font-weight: 300;
+                            color: #b1b1b1;
                         }
                     }
                 }
