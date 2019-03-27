@@ -31,6 +31,24 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../category/category.module#CategoryPageModule'
+          },
+          { 
+            path: 'search-list/:genderID/:genderName', 
+            children: [
+              {
+                path: '',
+                loadChildren: '../search-list/search-list.module#SearchListPageModule'
+              }
+            ]
+          },
+          { 
+            path: 'movie-detail/:movieID', 
+            children: [
+              {
+                path: '',
+                loadChildren: '../movie-detail/movie-detail.module#MovieDetailPageModule'
+              }
+            ]
           }
         ]
       },

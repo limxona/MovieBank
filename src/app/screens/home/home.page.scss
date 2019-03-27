@@ -29,7 +29,7 @@ ion-card {
 
 .movie-poster-card {
     border-radius: 5px;
-    margin: 5px; 
+    padding: 5px; 
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -39,8 +39,10 @@ ion-card {
 
     img {
         display: block;
-        width: calc( 50% - 20px);
-        height: 50%;
+        min-width: calc( 50vw - 30px);
+        min-height: calc( 75vw - 30px);
+        width: calc( 50vw - 30px);
+        height: calc( 75vw - 30px);
         border-radius: 10px;
         margin: 10px;
         

@@ -11,14 +11,14 @@ import { Observable } from 'rxjs';
 export class HomePage implements OnInit {
 
   movieList: Observable<Array<Movie>>;
-  selectedCategory: string = 'latest';
+  selectedCategory: string = 'popular';
   constructor(private movieService: MovieService) {
 
 
   }
 
   ngOnInit(): void {
-    this.getMovies('latest');
+    this.getMovies('popular');
 
   }
 
@@ -28,7 +28,7 @@ export class HomePage implements OnInit {
     switch (category) {
       case 'latest':
       this.selectedCategory = 'latest';
-        this.movieList = this.movieService.getTopRatedMovies();
+        this.movieList = this.movieService.getLatestMovies();
         break;
       case 'popular':
       this.selectedCategory = 'popular';
@@ -42,8 +42,8 @@ export class HomePage implements OnInit {
       this.selectedCategory = 'topRated';
       this.movieList = this.movieService.getTopRatedMovies();
         break;
-      case 'upcoming':
-      this.selectedCategory = 'upcoming';
+      case 'upComing':
+      this.selectedCategory = 'upComing';
       this.movieList = this.movieService.getTopUpcomingMovies();
         break;
       default:

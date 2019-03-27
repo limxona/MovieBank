@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/services/movie/movie.service';
-import { Observable } from 'rxjs';
 import { Movie } from 'src/app/models/movie';
 import { GenderService } from 'src/app/services/gender/gender.service';
 
@@ -18,25 +17,21 @@ export class SearchPage implements OnInit {
 
   ngOnInit() {
     this.getAllGenders();
-    this.searchMovie('test');
   }
 
   getAllGenders() {
     this.genderService.getAllGenders().subscribe(d => {
       console.log(d);
     });
-
   }
 
-  searchMovie(search: string){
-    console.log(search);
-    //this.movieList = this.movieService.searchMovie(search);
+  searchMovie(word: string){
+    let search = word.trim();
 
     this.movieService.searchMovie(search).subscribe(d => {
       this.movieList = d;
       console.log(d);
     });
-
   }
 
 }

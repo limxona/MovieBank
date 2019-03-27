@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{genderName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="movie-poster-card">
+    <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" onError="this.src = '../assets/images/no-image-poster.png'"  *ngFor="let movie of movieList"  [routerLink]="['/tabs/category/movie-detail/', movie.id]" />
+  </div> 
+
+</ion-content>

@@ -9,11 +9,11 @@
 
     <div class="movie-header">
       <div class="movie-backdrop-image">
-        <img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" />
+        <img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" onError="this.src = '../assets/images/no-image-path.png'" />
       </div>
 
       <div class="movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" />
+        <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" onError="this.src = '../assets/images/no-image-poster.png'" />
       </div>
     </div>
 

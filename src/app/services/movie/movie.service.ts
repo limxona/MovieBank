@@ -98,5 +98,17 @@ export class MovieService {
       })
     );
   }
+
+  getCategoryMovies(genderID: string) {
+    var data = {
+      with_genres: genderID
+    }
+    let url = 'discover/movie';
+    return this.http.get(url, {params: data}).pipe(
+      map((response: any) => {
+        return response.results as Array<Movie>; 
+      })
+    );
+  }
   
 }

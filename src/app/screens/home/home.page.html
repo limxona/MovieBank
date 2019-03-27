@@ -9,9 +9,6 @@
 <ion-content>
 
   <div class="segment-content">
-    <div class="category-content" [ngClass]="{'active': selectedCategory == 'latest'}" (click)="getMovies('latest');">
-      <span>Latest</span>
-    </div>
     <div class="category-content" [ngClass]="{'active': selectedCategory == 'popular'}" (click)="getMovies('popular');">
       <span>Popular</span>
     </div>
@@ -21,10 +18,13 @@
     <div class="category-content" [ngClass]="{'active': selectedCategory == 'nowPlaying'}" (click)="getMovies('nowPlaying');">
       <span>Now Playing</span>
     </div>
+    <div class="category-content" [ngClass]="{'active': selectedCategory == 'upComing'}" (click)="getMovies('upComing');">
+      <span>Latest</span>
+    </div>
   </div>
 
   <div class="movie-poster-card">
-    <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" *ngFor="let movie of movieList | async"  [routerLink]="['/tabs/home/movie-detail/', movie.id]" />
+    <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" onError="this.src = '../assets/images/no-image-poster.png'" *ngFor="let movie of movieList | async"  [routerLink]="['/tabs/home/movie-detail/', movie.id]" />
   </div> 
     
 </ion-content>

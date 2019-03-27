@@ -1,0 +1,21 @@
+.movie-poster-card {
+    border-radius: 5px;
+    padding: 5px; 
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+
+    img {
+        display: block;
+        min-width: calc( 50vw - 30px);
+        min-height: calc( 75vw - 30px);
+        width: calc( 50vw - 30px);
+        height: calc( 75vw - 30px);
+        border-radius: 10px;
+        margin: 10px;
+        
+    }
+}

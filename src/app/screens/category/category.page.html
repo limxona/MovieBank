@@ -7,7 +7,7 @@
 <ion-content padding>
 
   <div class="gender-content">
-    <div class="gender-item" *ngFor="let gender of genderList | async">
+    <div class="gender-item" *ngFor="let gender of genderList | async" [routerLink]="['/tabs/category/search-list/', gender.id, gender.name]">
       <span>{{gender.name}}</span>
     </div>
   </div>
