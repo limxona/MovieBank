@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Movie } from 'src/app/models/movie';
 
@@ -11,11 +11,10 @@ export class MovieService {
 
   
   constructor(private http: HttpClient) { 
-    console.log("MovieService is actived!");
   }
 
 
-  getLatestMovies() {
+  getLatestMovies(pageNumber: number) {
     return this.http.get("movie/latest").pipe(
       map((response: any) => {
         return response.results as Array<Movie>; 
@@ -24,32 +23,47 @@ export class MovieService {
   }
 
 
-  getPopularMovies() {
-    return this.http.get("movie/popular").pipe(
+  getPopularMovies(pageNumber: number) {
+    var data = {
+      page: pageNumber.toString()
+    }
+    return this.http.get("movie/popular", {params: data}).pipe(
       map((response: any) => {
         return response.results as Array<Movie>; 
       })
     );
   }
 
-  getTopRatedMovies() {
-    return this.http.get("movie/top_rated").pipe(
+  getTopRatedMovies(pageNumber: number) {
+    var data = {
+      page: pageNumber.toString()
+    }
+
+    return this.http.get("movie/top_rated", {params: data}).pipe(
       map((response: any) => {
         return response.results as Array<Movie>; 
       })
     );
   }
 
-  getTopUpcomingMovies() {
-    return this.http.get("movie/upcoming").pipe(
+  getTopUpcomingMovies(pageNumber: number) {
+    var data = {
+      page: pageNumber.toString()
+    }
+
+    return this.http.get("movie/upcoming", {params: data}).pipe(
       map((response: any) => {
         return response.results as Array<Movie>; 
       })
     );
   }
 
-  getTopNowPlayingMovies() {
-    return this.http.get("movie/now_playing").pipe(
+  getTopNowPlayingMovies(pageNumber: number) {
+    var data = {
+      page: pageNumber.toString()
+    }
+
+    return this.http.get("movie/now_playing", {params: data}).pipe(
       map((response: any) => {
         return response.results as Array<Movie>; 
       })
@@ -73,7 +87,6 @@ export class MovieService {
   getMovieDetail(movieID: string) {
     return this.http.get("movie/"+movieID).pipe(
       map((response: any) => {
-        console.log(response);
         return response as Movie; 
       })
     );
@@ -83,7 +96,6 @@ export class MovieService {
     let url = 'movie/'+movieID+'/credits';
     return this.http.get(url).pipe(
       map((response: any) => {
-        console.log(response);
         return response; 
       })
     );
@@ -93,7 +105,6 @@ export class MovieService {
     let url = 'movie/'+movieID+'/similar';
     return this.http.get(url).pipe(
       map((response: any) => {
-        console.log(response);
         return response.results as Array<Movie>; 
       })
     );

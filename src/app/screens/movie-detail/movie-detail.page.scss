@@ -1,3 +1,17 @@
+.back-button-content {
+    color: #cd4851;
+    width: 44px;
+    height: 44px;
+    font-size: 1.85em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 0px;    
+}
+
 .content {
     color: white;
     padding-bottom: 20px;
@@ -23,6 +37,21 @@
                 height: 39vw;
                 z-index: 4;
             }
+        }
+        
+        .movie-rating {
+            position: absolute;
+            right: 10px;
+            height: 44px;
+            width: 44px;
+            background-color: #0000004d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 21px;
+            font-weight: 600;
+            bottom: 10px;
         }
     }
     .movie-info {

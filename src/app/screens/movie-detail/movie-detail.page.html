@@ -5,6 +5,12 @@
 </ion-header>
  -->
 <ion-content>
+
+  <div class="back-button-content" (click)="navigateBack();">
+    <ion-icon name="arrow-back"></ion-icon>
+  </div>
+
+
   <div *ngIf="movie" class="content">
 
     <div class="movie-header">
@@ -14,6 +20,10 @@
 
       <div class="movie-poster">
         <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" onError="this.src = '../assets/images/no-image-poster.png'" />
+      </div>
+
+      <div class="movie-rating">
+        <span>{{movie.vote_average}}</span>
       </div>
     </div>
 

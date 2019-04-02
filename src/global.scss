@@ -31,6 +31,11 @@ ion-toolbar {
     --opacity: 1.0;
 }
 
+ion-back-button {
+    --color: #cd4851 !important;
+}
+
+
 .toolbar-background-md, .toolbar-background-ios,.toolbar-background-wp {
     background-color: white;
 }

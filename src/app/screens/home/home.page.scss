@@ -12,7 +12,7 @@
 
         span {
             color: white;            
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
         }
     }
@@ -47,4 +47,9 @@ ion-card {
         margin: 10px;
         
     }
+}
+
+ion-infinite-scroll {
+    color: #cd4851;
+    --color: #cd4851;
 }

@@ -4,6 +4,7 @@ import { Movie } from 'src/app/models/movie';
 import { Observable } from 'rxjs';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { Cast } from 'src/app/models/cast';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-movie-detail',
@@ -17,7 +18,7 @@ export class MovieDetailPage implements OnInit {
   castList: Cast[] = [];
   similarMovies: Movie[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private movieService: MovieService) { }
+  constructor(private navCtrl: NavController, private activatedRoute: ActivatedRoute, private movieService: MovieService) { }
 
   ngOnInit() {
     this.movieID = this.activatedRoute.snapshot.paramMap.get('movieID');
@@ -27,6 +28,10 @@ export class MovieDetailPage implements OnInit {
       this.getSimilarMovies();
     }, 500);
     
+  }
+
+  navigateBack() {
+    this.navCtrl.pop();
   }
 
   getMovieDetail() {

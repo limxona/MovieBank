@@ -1,8 +1,21 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>{{genderName}}</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button
+            [text]="' '"
+            [icon]="'arrow-back'"
+            color="#cd4851">
+        </ion-back-button>
+      </ion-buttons>
+      <ion-title>{{genderName}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content>
 
