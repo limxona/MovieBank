@@ -34,6 +34,22 @@ export class MovieDetailPage implements OnInit {
     this.navCtrl.pop();
   }
 
+  addMovieToList(){
+    console.log("Add to list");
+  }
+
+  likeMovie() {
+    console.log("Like Movie");
+  }
+
+  addMovieToWatchList() {
+    console.log("Watch List");
+  }
+
+  rateMovie() {
+    console.log("Rate List");
+  }
+
   getMovieDetail() {
     this.movieService.getMovieDetail(this.movieID).subscribe(d => {
       console.log(d);
