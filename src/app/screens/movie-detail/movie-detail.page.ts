@@ -4,7 +4,8 @@ import { Movie } from 'src/app/models/movie';
 import { Observable } from 'rxjs';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { Cast } from 'src/app/models/cast';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
+import { AccountService } from 'src/app/services/account/account.service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -18,7 +19,12 @@ export class MovieDetailPage implements OnInit {
   castList: Cast[] = [];
   similarMovies: Movie[] = [];
 
-  constructor(private navCtrl: NavController, private activatedRoute: ActivatedRoute, private movieService: MovieService) { }
+  constructor(private navCtrl: NavController,
+     private activatedRoute: ActivatedRoute, 
+     private movieService: MovieService,
+     private accountService: AccountService,
+     private modalController: ModalController) { }
+
 
   ngOnInit() {
     this.movieID = this.activatedRoute.snapshot.paramMap.get('movieID');
@@ -35,19 +41,35 @@ export class MovieDetailPage implements OnInit {
   }
 
   addMovieToList(){
-    console.log("Add to list");
+
+    
+
+
+
+    this.accountService.addMovieToList().subscribe(d => {
+      console.log("AddMovie: ", d);
+    });
   }
 
   likeMovie() {
-    console.log("Like Movie");
+    this.accountService.markAsFavorite(Number(this.movieID), 'movie', true).subscribe(d => {
+      console.log("Favorite Result: ", d);
+    });
   }
 
   addMovieToWatchList() {
     console.log("Watch List");
+    this.accountService.addToWatchList(Number(this.movieID), 'movie', true).subscribe(d => {
+      console.log(d);
+    });
   }
 
   rateMovie() {
     console.log("Rate List");
+  }
+
+  shareMovie() {
+    console.log("share Movie");
   }
 
   getMovieDetail() {

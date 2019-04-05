@@ -17,8 +17,7 @@ export class AuthService {
       return true;
     }
     else {
-      let guestSessionID = localStorage.getItem('guestSessionID');
-      return guestSessionID ? true : false;
+      return false;
     }
   }
 
