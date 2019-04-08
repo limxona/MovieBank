@@ -15,9 +15,11 @@ import { AccountService } from 'src/app/services/account/account.service';
 export class MovieDetailPage implements OnInit {
 
   private movieID: string = "";
+  private trailerURL: any = null;
   movie: Movie;
   castList: Cast[] = [];
   similarMovies: Movie[] = [];
+  rate: number = 0;
 
   constructor(private navCtrl: NavController,
      private activatedRoute: ActivatedRoute, 
@@ -32,8 +34,10 @@ export class MovieDetailPage implements OnInit {
       this.getMovieDetail();
       this.getMovieCast();
       this.getSimilarMovies();
+      this.getMovieTrailer();
+      this.getAccountStateForMovie();
+      
     }, 500);
-    
   }
 
   navigateBack() {
@@ -41,11 +45,6 @@ export class MovieDetailPage implements OnInit {
   }
 
   addMovieToList(){
-
-    
-
-
-
     this.accountService.addMovieToList().subscribe(d => {
       console.log("AddMovie: ", d);
     });
@@ -64,8 +63,22 @@ export class MovieDetailPage implements OnInit {
     });
   }
 
-  rateMovie() {
-    console.log("Rate List");
+  rateMovie(i: any) {
+    if(i == this.rate) {
+      this.rate = 0;
+      this.accountService.deleteRate(this.movieID).subscribe(d => { console.log(d); });
+    }
+    else {
+      this.rate = i;
+      this.accountService.rateMovie(this.movieID, this.rate).subscribe(d => {
+
+      });
+    }
+    console.log("Rate List :", i);
+  }
+
+  showMovieTrailer() {
+    console.log("Trailer URL :", this.trailerURL);
   }
 
   shareMovie() {
@@ -80,12 +93,22 @@ export class MovieDetailPage implements OnInit {
 
   }
 
+  getAccountStateForMovie() {
+    this.movieService.getAccountStateForMovie(this.movieID).subscribe(d => {});
+  }
+
   getMovieCast() {
     this.movieService.getMovieCast(this.movieID).subscribe(d => {
       let tmpCastList = d.cast as Cast[];
       this.castList = tmpCastList.length > 10 ? tmpCastList.slice(0,10) : tmpCastList;
 
       console.log(this.castList);
+    });
+  }
+
+  getMovieTrailer() {
+    this.movieService.getMovieTrailerURL(this.movieID).subscribe(d => {
+      this.trailerURL = d;
     });
   }
 

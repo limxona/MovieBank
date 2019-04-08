@@ -34,6 +34,7 @@ export class AppComponent {
 
   checkSession() {
     let isSessionExist = this.authService.isSessionExist();
+    console.log(isSessionExist);
     if(!isSessionExist) {
       //this.requestToken()
       this.authService.createGuestSession().subscribe(d => {

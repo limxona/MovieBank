@@ -54,6 +54,21 @@
         <ion-icon name="share" (click)="shareMovie()"></ion-icon>
       </div>
 
+      <div class="second-movie-user-actions">
+        <div class="movie-rate">
+          <ion-icon name="star" 
+          *ngFor="let i of [1,2,3,4,5];" 
+          [ngClass]="{'active': rate >= i}"
+          (click)="rateMovie(i)"
+          ></ion-icon>
+        </div>
+
+        <div class="movie-play" (click)="showMovieTrailer();">
+          <ion-icon name="play"></ion-icon>
+          <span>Trailer</span>
+        </div>
+      </div>
+
       <div class="overview">
         <div class=title>
           <span class="title">Overview</span>

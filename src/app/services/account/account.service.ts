@@ -90,7 +90,6 @@ export class AccountService {
       return Observable.create((o: any) => { o.next(false); o.complete(); });
     }
     else {
-      ///account/{account_id}/favorite
       let accountID = '';
       let url = 'account/' + accountID + '/favorite';
       var params = {
@@ -110,6 +109,44 @@ export class AccountService {
     }
 
   }
+
+  rateMovie(movieID: string, rate: number) {
+    let url = 'movie/'+movieID+'/rating';
+    let guestSessionID = localStorage.getItem('guestSessionID');
+    let params = {
+      value: rate
+    }
+    let queryString = {
+      guest_session_id: guestSessionID,
+      session_id: ""
+    }
+
+    return this.http.post(url, params, {params: queryString}).pipe(
+      map((response: any) => {
+        console.log("Rate Response : ", response);
+        return true;
+      })
+    );
+  }
+
+  deleteRate(movieID: string) {
+    let url = 'movie/'+movieID+'/rating';
+    let guestSessionID = localStorage.getItem('guestSessionID');
+
+    let queryString = {
+      guest_session_id: guestSessionID,
+      session_id: ""
+    }
+
+    return this.http.delete(url, {params: queryString}).pipe(
+      map((response: any) => {
+        console.log("Dete Rate Response : ", response);
+        return true;
+      })
+    );
+  }
+
+  
 
   /* 
     Get Created Lists

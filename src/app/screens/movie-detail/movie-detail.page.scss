@@ -106,8 +106,8 @@
             font-size: 30px;
             padding-left: 30px;
             padding-right: 30px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
             justify-content: space-between;
             align-items: center;
             
@@ -116,8 +116,47 @@
             }
         }
 
+        .second-movie-user-actions {
+            display: flex;
+            padding: 10px 0px;            
+            background-color: #0a0a0a;
+            border-bottom: 3px solid #cd4851;
+            
+            .movie-rate {
+                padding: 0px 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 25px;
+                width: 50%; 
+                border-right: 1px solid #b1b1b1;
+
+                ion-icon {
+                    padding-left: 5px;
+
+                    &:first-child {
+                        padding-left: 0px;
+                    }
+                }
+
+                .active {
+                    color: #cd4851;
+                }
+            }
+
+            .movie-play {
+                padding: 0px 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 21px;
+                width: 50%;
+                border-left: 1px solid #b1b1b1;
+            }
+        }
+
         .overview {
-            padding: 00px 20px 20px 20px;
+            padding: 20px 20px 20px 20px;
 
             .title {
                 font-size: 21px;
