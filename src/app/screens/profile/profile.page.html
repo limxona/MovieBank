@@ -4,6 +4,54 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+
+  <div class="login-container" *ngIf="!isSessionExist">
+    <div class="login">
+      <div class="login-message">
+        <span class="appname">Best Movies</span>
+        <span class="messsage">Please login to app for see your account.</span>
+      </div>
+      <div class="login-button">
+        <button class="btn" (click)="login();">Login</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="isSessionExist">
+    <div class="account-info">
+      <div class="account-picture">
+        <img src="https://image.tmdb.org/t/p/w500/sadasd" onError="this.src = '../assets/images/no-image-poster.png'" />
+      </div>
+
+      <div class="account-name">
+        <span>limxona</span>
+      </div>
+    </div>
+
+    <div class="account-menu">
+      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'watchlist'}">
+        <span>Summary</span>
+      </div>
+
+      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'sd'}">
+        <span>Watchlist</span>
+      </div>
+
+      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'popula1r'}">
+        <span>Likes</span>
+      </div>
+
+      <div class="menu-item" [ngClass]="{'active': selectedMenu == '34'}">
+        <span>Lists</span>
+      </div>
+    </div>
+
+  </div>
+
+
+
 
 </ion-content>

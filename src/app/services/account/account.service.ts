@@ -16,10 +16,11 @@ export class AccountService {
   }
 
   getAccountDetails() {
-    var params = { 'session_id': this.authService.getSessionID() };
-    return this.http.get('/account', { params: params }).pipe(
+    var params = { 'session_id': localStorage.getItem('sessionID') };
+    return this.http.get('account', { params: params }).pipe(
       map((response: any) => {
         console.log("Account: ", response);
+        return response;
       })
     );
 
@@ -52,7 +53,6 @@ export class AccountService {
     else {
       return new Observable<true>();
     }
-
   }
 
   addToWatchList(mediaID: number, mediaType: string, actionType: boolean): Observable<boolean> {
