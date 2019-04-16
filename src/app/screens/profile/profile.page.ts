@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/account/account.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-profile',
@@ -9,8 +10,9 @@ import { AccountService } from 'src/app/services/account/account.service';
 })
 export class ProfilePage implements OnInit {
 
-  selectedMenu: string = "watchlist";
-  isSessionExist: boolean = false;
+  selectedMenu: string = "list";
+  loggedUser: User;
+  isSessionExist: boolean = true;
   constructor(private authService: AuthService, private accountService: AccountService) { }
 
   ngOnInit() {
@@ -20,7 +22,25 @@ export class ProfilePage implements OnInit {
   getAccountDetails() {
     this.accountService.getAccountDetails().subscribe(d => {
       console.log("Account Detail: ", d);
+      this.loggedUser = d;
+      this.getAccountWatchList();
+      this.getAccountLists();
+      this.getAccountFavoriteMovies();
     });
+  }
+
+  getAccountWatchList() {
+    this.accountService.getMovieWatchList().subscribe(d => {
+
+    });
+  }
+
+  getAccountLists() {
+    this.accountService.getCreatedLists().subscribe(d => {}); 
+  }
+
+  getAccountFavoriteMovies() {
+    this.accountService.getFavoriteMovies().subscribe(d => {});
   }
 
   login() {

@@ -4,11 +4,13 @@ import { map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { Observable, observable } from 'rxjs';
 import { CoreService } from '../core/core.service';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: "root"
 })
 export class AccountService {
+  private user: User;
   constructor(
     private http: HttpClient,
     private authService: AuthService,
@@ -19,18 +21,22 @@ export class AccountService {
     var params = { 'session_id': localStorage.getItem('sessionID') };
     return this.http.get('account', { params: params }).pipe(
       map((response: any) => {
-        console.log("Account: ", response);
-        return response;
+        this.user = response;
+        return response as User;
       })
     );
 
   }
 
   getCreatedLists() {
-    let accountID = '';
+    let accountID = this.user.id;
     let url = 'account/' + accountID + '/lists';
 
-    return this.http.get(url).pipe(
+    var queryParams = {
+      session_id: localStorage.getItem('sessionID')
+    }
+
+    return this.http.get(url, {params: queryParams}).pipe(
       map((response: any) => {
         console.log("Account: ", response);
       })
@@ -38,11 +44,39 @@ export class AccountService {
 
   }
 
-  getFavoriteMovies() { }
+  getFavoriteMovies() { 
+    let accountID = this.user.id;
+    let url = 'account/'+accountID+'/favorite/movies';
+
+    var queryParams = {
+      session_id: localStorage.getItem('sessionID')
+    }
+
+    return this.http.get(url, {params: queryParams}).pipe(
+      map((response: any) => {
+        console.log("Favorite Movies: ", response);
+      })
+    );
+  }
 
   getRatedMovies() { }
 
-  getMovieWatchList() { }
+  getMovieWatchList() { 
+    
+    let accountID = this.user.id;
+    let url = 'account/'+accountID+'/watchlist/movies';
+
+    var queryParams = {
+      session_id: localStorage.getItem('sessionID')
+    }
+    return this.http.get(url, { params: queryParams }).pipe(
+      map((response: any) => {
+        console.log("User's WatchList : ", response);
+        return true;
+      })
+    );
+
+  }
 
   addMovieToList(): Observable<boolean> {
     let isSessionExist = this.authService.isSessionExist();
@@ -63,7 +97,7 @@ export class AccountService {
       return Observable.create((o: any) => { o.next(false); o.complete(); });
     }
     else {
-      let accountID = '';
+      let accountID = this.user.id;
       let url = 'account/' + accountID + '/watchlist';
       var params = {
         "media_type": "movie",
@@ -90,7 +124,7 @@ export class AccountService {
       return Observable.create((o: any) => { o.next(false); o.complete(); });
     }
     else {
-      let accountID = '';
+      let accountID = this.user.id;
       let url = 'account/' + accountID + '/favorite';
       var params = {
         "media_type": "movie",

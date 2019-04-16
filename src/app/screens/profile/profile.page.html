@@ -23,29 +23,29 @@
   <div *ngIf="isSessionExist">
     <div class="account-info">
       <div class="account-picture">
-        <img src="https://image.tmdb.org/t/p/w500/sadasd" onError="this.src = '../assets/images/no-image-poster.png'" />
+        <img src="https://www.gravatar.com/avatar/bfe90ba6a545766dfba93673d254c730" onError="this.src = '../assets/images/no-image-poster.png'" />
       </div>
 
       <div class="account-name">
-        <span>limxona</span>
+        <span>{{loggedUser?.username}}</span>
       </div>
     </div>
 
     <div class="account-menu">
-      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'watchlist'}">
+      <!-- <div class="menu-item" [ngClass]="{'active': selectedMenu == 'watchlist'}">
         <span>Summary</span>
+      </div> -->
+
+      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'list'}">
+        <span>Lists</span>
       </div>
 
-      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'sd'}">
+      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'watchlist'}">
         <span>Watchlist</span>
       </div>
 
-      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'popula1r'}">
-        <span>Likes</span>
-      </div>
-
-      <div class="menu-item" [ngClass]="{'active': selectedMenu == '34'}">
-        <span>Lists</span>
+      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'favorite'}">
+        <span>Favorites</span>
       </div>
     </div>
 
