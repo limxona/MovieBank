@@ -36,22 +36,19 @@
         <span>Summary</span>
       </div> -->
 
-      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'list'}">
+      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'list'}" (click)="changeTab('list')">
         <span>Lists</span>
       </div>
 
-      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'watchlist'}">
+      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'watchlist'}" (click)="changeTab('watchlist')">
         <span>Watchlist</span>
       </div>
 
-      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'favorite'}">
+      <div class="menu-item" [ngClass]="{'active': selectedMenu == 'favorite'}" (click)="changeTab('favorite')">
         <span>Favorites</span>
       </div>
+
     </div>
-
   </div>
-
-
-
 
 </ion-content>

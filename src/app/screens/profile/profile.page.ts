@@ -23,23 +23,36 @@ export class ProfilePage implements OnInit {
     this.accountService.getAccountDetails().subscribe(d => {
       console.log("Account Detail: ", d);
       this.loggedUser = d;
-      this.getAccountWatchList();
       this.getAccountLists();
-      this.getAccountFavoriteMovies();
     });
   }
 
-  getAccountWatchList() {
+  changeTab(selectedTab: string) {
+    console.log(selectedTab);
+    this.selectedMenu = selectedTab;
+    if(selectedTab == 'list') {
+      this.getAccountLists();
+    }
+    else if(selectedTab == 'watchlist') {
+      this.getAccountWatchList();
+    }
+    else if(selectedTab == 'favorite') {
+      this.getAccountFavoriteMovies();
+    }
+    else {}
+  }
+
+  private getAccountWatchList() {
     this.accountService.getMovieWatchList().subscribe(d => {
 
     });
   }
 
-  getAccountLists() {
+  private getAccountLists() {
     this.accountService.getCreatedLists().subscribe(d => {}); 
   }
 
-  getAccountFavoriteMovies() {
+  private getAccountFavoriteMovies() {
     this.accountService.getFavoriteMovies().subscribe(d => {});
   }
 
