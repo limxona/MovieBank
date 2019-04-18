@@ -10,14 +10,15 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
-
 ion-content{
-    --ion-background-color: rgb(0, 0, 0);
+    --ion-background-color: rgb(0, 0, 0);  
+    font-family: 'Oxygen', sans-serif;
 }
 
 ion-tab-bar {
     --background: black;
     --color: white;
+    font-family: 'Oxygen', sans-serif;
 
 }
 
@@ -29,6 +30,7 @@ ion-toolbar {
     --background: black;
     --color: #cd4851;
     --opacity: 1.0;
+    font-family: 'Oxygen', sans-serif;
 }
 
 ion-back-button {
@@ -39,6 +41,8 @@ ion-back-button {
 .toolbar-background-md, .toolbar-background-ios,.toolbar-background-wp {
     background-color: white;
 }
+
+
 
 
  

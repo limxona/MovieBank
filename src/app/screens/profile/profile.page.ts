@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/account/account.service';
 import { User } from 'src/app/models/user';
+import { UserList } from 'src/app/models/user-list';
+import { Movie } from 'src/app/models/movie';
 
 @Component({
   selector: 'app-profile',
@@ -12,18 +14,23 @@ export class ProfilePage implements OnInit {
 
   selectedMenu: string = "list";
   loggedUser: User;
-  isSessionExist: boolean = true;
+  isSessionExist: boolean = false;
+  userLists: UserList[] = [];
+  userWatchList: Movie[] = [];
+  userFavoriteList: Movie[] = [];
   constructor(private authService: AuthService, private accountService: AccountService) { }
 
   ngOnInit() {
-    this.getAccountDetails();    
+    if(this.checkSession()){
+      this.getAccountDetails();
+    }
   }
 
   getAccountDetails() {
     this.accountService.getAccountDetails().subscribe(d => {
       console.log("Account Detail: ", d);
       this.loggedUser = d;
-      this.getAccountLists();
+      this.getAccountLists(); 
     });
   }
 
@@ -43,17 +50,21 @@ export class ProfilePage implements OnInit {
   }
 
   private getAccountWatchList() {
-    this.accountService.getMovieWatchList().subscribe(d => {
-
+    this.accountService.getMovieWatchList().subscribe(movieList => {
+      this.userWatchList = movieList;
     });
   }
 
   private getAccountLists() {
-    this.accountService.getCreatedLists().subscribe(d => {}); 
+    this.accountService.getCreatedLists().subscribe(list => {
+      this.userLists = list;
+    }); 
   }
 
   private getAccountFavoriteMovies() {
-    this.accountService.getFavoriteMovies().subscribe(d => {});
+    this.accountService.getFavoriteMovies().subscribe(list => {
+      this.userFavoriteList = list;
+    });
   }
 
   login() {
@@ -71,7 +82,8 @@ export class ProfilePage implements OnInit {
   }
 
   checkSession() {
-
+    this.isSessionExist = this.authService.checkUserSession();
+    return this.isSessionExist;
   }
 
 }

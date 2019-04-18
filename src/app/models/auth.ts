@@ -4,6 +4,12 @@ export interface GuestSession {
   success: boolean;
 }
 
+export interface UserSession {
+  expires_at: string;
+  session_id: string;
+  success: boolean;
+}
+
 export interface RequestToken {
   expires_at: string;
   request_token: string;

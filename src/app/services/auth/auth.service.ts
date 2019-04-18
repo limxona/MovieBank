@@ -1,14 +1,41 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { GuestSession, RequestToken } from 'src/app/models/auth';
+import { GuestSession, RequestToken, UserSession } from 'src/app/models/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   
+  private guestUserSession: GuestSession;
+  private userSession: UserSession;
+
   constructor(private http: HttpClient) { 
+  }
+
+  checkSession() {
+    if(this.getUserSessionResponse()) { //eğer user var ise burada expiredate'i kontrol edecez.
+      let isUserSessionExpired = this.checkExpireDate(this.userSession.expires_at);
+      if(isUserSessionExpired) {
+        localStorage.removeItem('userSession');
+      }
+    }
+    else { //user yok ise guess user var mı bakacaz. 
+      if(this.getGuestSessionResponse()) {
+        let isGuestSessionExpired = this.checkExpireDate(this.guestUserSession.expires_at);
+        if(isGuestSessionExpired) {
+          this.createGuestSession();
+        }
+      }
+      else {
+        this.createGuestSession();
+      }
+    }
+  }
+
+  checkUserSession() {
+    return this.getUserSessionResponse() ? true : false;
   }
 
   isSessionExist(): boolean {
@@ -29,12 +56,10 @@ export class AuthService {
   }
 
   createGuestSession() {
-    return this.http.get("/authentication/guest_session/new").pipe(
-      map((response: GuestSession) => {
-        localStorage.setItem('guestSessionID', response.guest_session_id);
-        return response;
-      })
-    );
+    this.http.get("/authentication/guest_session/new").subscribe((guest: GuestSession) => {
+      let guestStr = JSON.stringify(guest);
+      localStorage.setItem('guestUserSession', guestStr);
+    });
   }
 
   createRequestToken() {
@@ -80,6 +105,29 @@ export class AuthService {
       })
     );
 
+  }
+
+  private checkExpireDate(expireDate: string) {
+    let expDate  = new Date(expireDate);
+    let now = new Date();
+    
+    return now > expDate;
+  }
+
+  private getGuestSessionResponse() {
+    if(!this.guestUserSession) {
+      let session = JSON.parse(localStorage.getItem('guestUserSession')) as GuestSession;
+      this.guestUserSession = session;
+    }
+    return this.guestUserSession;
+  }
+
+  private getUserSessionResponse() {
+    if(!this.userSession) {
+      let session = JSON.parse(localStorage.getItem('userSession')) as UserSession;
+      this.userSession = session;
+    }
+    return this.userSession;
   }
 
 }

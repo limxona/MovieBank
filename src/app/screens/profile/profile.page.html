@@ -49,6 +49,50 @@
       </div>
 
     </div>
+
+    <div class="menu-content">
+
+      <div class="user-list-content" *ngIf="selectedMenu == 'list'">
+        <div class="list" *ngFor="let list of userLists">
+          <span class="title">
+            {{list.name}}
+          </span>
+          <span class="sub-title">
+            {{list.item_count}} item - {{list.list_type}}
+          </span>
+        </div>
+      </div>
+
+      <div class="user-watchlist-content" *ngIf="selectedMenu == 'watchlist'">
+        <div class="watchlist-item" *ngFor="let movie of userWatchList">
+          <div class="item-image">
+              <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" onError="this.src = '../assets/images/no-image-poster.png'" />
+          </div>
+          <div class="title">
+            <span>{{movie.title}} ({{movie.release_date | date: 'yyyy'}})</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-watchlist-content" *ngIf="selectedMenu == 'favorite'">
+          <div class="watchlist-item" *ngFor="let movie of userFavoriteList">
+            <div class="item-image">
+                <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" onError="this.src = '../assets/images/no-image-poster.png'" />
+            </div>
+            <div class="title">
+              <span>{{movie.title}} ({{movie.release_date | date: 'yyyy'}})</span>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+
+
+
+
   </div>
+
+
 
 </ion-content>

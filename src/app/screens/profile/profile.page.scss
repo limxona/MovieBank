@@ -102,3 +102,55 @@
         border-bottom: 3px solid #cd4851;
     }
 }
+
+.menu-content {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    .user-list-content {
+        .list {
+            width: 100%;
+            height: calc(50vw - 20px);
+            background-color: #353535;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 10px;
+            margin-bottom: 10px;
+
+            .title {
+                color: white;
+                font-size: 25px;
+            }
+
+            .sub-title {
+                color: white;
+            }
+        }
+    }
+
+    .user-watchlist-content {
+        .watchlist-item {
+            width: 100%;
+            padding: 10px;
+            background-color: #353535;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+
+            .item-image {
+                width: 50px;
+                height: 76px;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            .title {
+                color: white;
+                font-weight: bold;
+                margin-left: 10px;
+            }
+        }
+    }
+}

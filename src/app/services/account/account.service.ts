@@ -5,6 +5,8 @@ import { AuthService } from '../auth/auth.service';
 import { Observable, observable } from 'rxjs';
 import { CoreService } from '../core/core.service';
 import { User } from 'src/app/models/user';
+import { UserListResponse } from 'src/app/models/user-list';
+import { MovieResponse } from 'src/app/models/movie';
 
 @Injectable({
   providedIn: "root"
@@ -37,8 +39,8 @@ export class AccountService {
     }
 
     return this.http.get(url, {params: queryParams}).pipe(
-      map((response: any) => {
-        console.log("Account: ", response);
+      map((response: UserListResponse) => {
+        return response.results;
       })
     );
 
@@ -53,8 +55,9 @@ export class AccountService {
     }
 
     return this.http.get(url, {params: queryParams}).pipe(
-      map((response: any) => {
+      map((response: MovieResponse) => {
         console.log("Favorite Movies: ", response);
+        return response.results;
       })
     );
   }
@@ -70,9 +73,9 @@ export class AccountService {
       session_id: localStorage.getItem('sessionID')
     }
     return this.http.get(url, { params: queryParams }).pipe(
-      map((response: any) => {
+      map((response: MovieResponse) => {
         console.log("User's WatchList : ", response);
-        return true;
+        return response.results;
       })
     );
 
