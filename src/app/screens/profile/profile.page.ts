@@ -4,6 +4,7 @@ import { AccountService } from 'src/app/services/account/account.service';
 import { User } from 'src/app/models/user';
 import { UserList } from 'src/app/models/user-list';
 import { Movie } from 'src/app/models/movie';
+import { CoreService } from 'src/app/services/core/core.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +19,10 @@ export class ProfilePage implements OnInit {
   userLists: UserList[] = [];
   userWatchList: Movie[] = [];
   userFavoriteList: Movie[] = [];
-  constructor(private authService: AuthService, private accountService: AccountService) { }
+  constructor(
+    private authService: AuthService, 
+    private accountService: AccountService,
+    private coreService: CoreService) { }
 
   ngOnInit() {
     if(this.checkSession()){
@@ -68,16 +72,33 @@ export class ProfilePage implements OnInit {
   }
 
   login() {
-    /* this.authService.createRequestToken().subscribe(d => {
+    this.authService.createRequestToken().subscribe(d => {
       console.log('Request Token: ', d);
-      localStorage.setItem('requestToken', d.request_token);
-    }); */
+      if(d != false) {
+        d.subscribe((result: any) => {
+          alert(result.event);
+          if (result.event === 'closed') { 
+            alert("kapatıldı.");
+          }
+        },
+          (error: any) => alert('error')
+        );
+
+      }
+      else {
+        alert("1");
+      }
+      
+
+    });
+
+   /*  this.coreService.showBrowser('sada');
     
     let requestToken = localStorage.getItem('requestToken');
     this.authService.createSession(requestToken).subscribe(d => {
       console.log(d);
       localStorage.setItem('sessionID', d.session_id);
-    });
+    }); */
 
   }
 

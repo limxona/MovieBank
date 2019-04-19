@@ -2,29 +2,30 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { GuestSession, RequestToken, UserSession } from 'src/app/models/auth';
+import { CoreService } from '../core/core.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  
+
   private guestUserSession: GuestSession;
   private userSession: UserSession;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private coreService: CoreService) {
   }
 
   checkSession() {
-    if(this.getUserSessionResponse()) { //eğer user var ise burada expiredate'i kontrol edecez.
+    if (this.getUserSessionResponse()) { //eğer user var ise burada expiredate'i kontrol edecez.
       let isUserSessionExpired = this.checkExpireDate(this.userSession.expires_at);
-      if(isUserSessionExpired) {
+      if (isUserSessionExpired) {
         localStorage.removeItem('userSession');
       }
     }
     else { //user yok ise guess user var mı bakacaz. 
-      if(this.getGuestSessionResponse()) {
+      if (this.getGuestSessionResponse()) {
         let isGuestSessionExpired = this.checkExpireDate(this.guestUserSession.expires_at);
-        if(isGuestSessionExpired) {
+        if (isGuestSessionExpired) {
           this.createGuestSession();
         }
       }
@@ -40,7 +41,7 @@ export class AuthService {
 
   isSessionExist(): boolean {
     let user = localStorage.getItem('userCredentials');
-    if(user){
+    if (user) {
       return true;
     }
     else {
@@ -52,7 +53,7 @@ export class AuthService {
     let user = localStorage.getItem('userCredentials');
     let guestSessionID = localStorage.getItem('guestSessionID');
 
-    return user ? user : guestSessionID; 
+    return user ? user : guestSessionID;
   }
 
   createGuestSession() {
@@ -65,8 +66,13 @@ export class AuthService {
   createRequestToken() {
     return this.http.get("/authentication/token/new").pipe(
       map((response: RequestToken) => {
-        localStorage.setItem('requestToken', response.request_token);
-        return response;
+        if (response.success) {
+          let url = 'https://www.themoviedb.org/authenticate/' + response.request_token;
+           return this.coreService.showBrowser(url);
+        }
+        else {
+          return false;
+        }
       })
     );
   }
@@ -99,7 +105,7 @@ export class AuthService {
     let param = {
       "session_id": "2629f70fb498edc263a0adb99118ac41f0053e8c"
     }
-    return this.http.delete("/authentication/session", {params: param}).pipe(
+    return this.http.delete("/authentication/session", { params: param }).pipe(
       map((response: any) => {
         return response;
       })
@@ -108,14 +114,14 @@ export class AuthService {
   }
 
   private checkExpireDate(expireDate: string) {
-    let expDate  = new Date(expireDate);
+    let expDate = new Date(expireDate);
     let now = new Date();
-    
+
     return now > expDate;
   }
 
   private getGuestSessionResponse() {
-    if(!this.guestUserSession) {
+    if (!this.guestUserSession) {
       let session = JSON.parse(localStorage.getItem('guestUserSession')) as GuestSession;
       this.guestUserSession = session;
     }
@@ -123,7 +129,7 @@ export class AuthService {
   }
 
   private getUserSessionResponse() {
-    if(!this.userSession) {
+    if (!this.userSession) {
       let session = JSON.parse(localStorage.getItem('userSession')) as UserSession;
       this.userSession = session;
     }

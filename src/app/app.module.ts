@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomHttpInterceptor } from './core/custom-http.interceptor';
 
+import { SafariViewController } from '@ionic-native/safari-view-controller/ngx'
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,6 +25,7 @@ import { CustomHttpInterceptor } from './core/custom-http.interceptor';
   providers: [
     StatusBar,
     SplashScreen,
+    SafariViewController,
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
