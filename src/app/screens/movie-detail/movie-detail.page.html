@@ -49,8 +49,8 @@
 
       <div class="movie-user-actions">
         <ion-icon name="list" (click)="addMovieToList()"></ion-icon>
-        <ion-icon name="heart" (click)="likeMovie()"></ion-icon>
-        <ion-icon name="bookmark" (click)="addMovieToWatchList()"></ion-icon>
+        <ion-icon [ngClass]="{'favorited': isFavorite}" name="heart" (click)="likeMovie()"></ion-icon>
+        <ion-icon [ngClass]="{'selected': isOnWatchlist}" name="bookmark" (click)="addMovieToWatchList()"></ion-icon>
         <ion-icon name="share" (click)="shareMovie()"></ion-icon>
       </div>
 

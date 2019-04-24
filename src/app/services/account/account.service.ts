@@ -24,10 +24,22 @@ export class AccountService {
     return this.http.get('account', { params: params }).pipe(
       map((response: any) => {
         this.user = response;
+        localStorage.setItem('userSession', JSON.stringify(response));
+        console.log(this.user);
         return response as User;
       })
     );
 
+  }
+
+  private getUser() {
+    if(this.user) {
+      return this.user;
+    } 
+    else {
+      this.user = JSON.parse(localStorage.getItem('userSession')) as User;
+      return this.user
+    }
   }
 
   getCreatedLists() {
@@ -82,7 +94,7 @@ export class AccountService {
   }
 
   addMovieToList(): Observable<boolean> {
-    let isSessionExist = this.authService.isSessionExist();
+    let isSessionExist = this.authService.checkUserSession();
     if (!isSessionExist) {
       this.coreService.showAlertMessage('You should login to app for add item to your lists!');
       return Observable.create((o: any) => { o.next(false); o.complete(); });
@@ -92,55 +104,65 @@ export class AccountService {
     }
   }
 
-  addToWatchList(mediaID: number, mediaType: string, actionType: boolean): Observable<boolean> {
+  addToWatchList(mediaID: Number, mediaType: String, actionType: Boolean): Observable<Boolean> {
 
-    let isSessionExist = this.authService.isSessionExist();
+    let isSessionExist = this.authService.checkUserSession();
     if (!isSessionExist) {
       this.coreService.showAlertMessage('You should login to app for adding to watchlist!');
       return Observable.create((o: any) => { o.next(false); o.complete(); });
     }
     else {
-      let accountID = this.user.id;
+      let accountID = this.getUser().id;
       let url = 'account/' + accountID + '/watchlist';
       var params = {
         "media_type": "movie",
         "media_id": mediaID,
         "watchlist": actionType
       }
-      var queryParams = {
+      var queryParams: any = {
         session_id: this.authService.getSessionID()
       }
       return this.http.post(url, params, { params: queryParams }).pipe(
         map((response: any) => {
           console.log("Add To WatchList : ", response);
-          return true;
+          if(response.status_code == 1) {
+            return true;
+          }
+          else if(response.status_code == 13) {
+            return false;
+          }
         })
       );
     }
   }
 
-  markAsFavorite(mediaID: number, mediaType: string, actionType: boolean): Observable<boolean> {
+  markAsFavorite(mediaID: Number, mediaType: String, actionType: Boolean): Observable<Boolean> {
 
-    let isSessionExist = this.authService.isSessionExist();
+    let isSessionExist = this.authService.checkUserSession();
     if (!isSessionExist) {
       this.coreService.showAlertMessage('You should login to app for mark as favorite!');
       return Observable.create((o: any) => { o.next(false); o.complete(); });
     }
     else {
-      let accountID = this.user.id;
+      let accountID = this.getUser().id;
       let url = 'account/' + accountID + '/favorite';
       var params = {
         "media_type": "movie",
         "media_id": mediaID,
         "favorite": actionType
       }
-      var queryParams = {
+      var queryParams: any = {
         session_id: this.authService.getSessionID()
       }
       return this.http.post(url, params, { params: queryParams }).pipe(
         map((response: any) => {
           console.log("Mark Favorite : ", response);
-          return true;
+          if(response.status_code == 1) {
+            return true;
+          }
+          else if(response.status_code == 13) {
+            return false;
+          }
         })
       );
     }

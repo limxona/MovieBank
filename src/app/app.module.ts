@@ -11,7 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomHttpInterceptor } from './core/custom-http.interceptor';
 
-import { SafariViewController } from '@ionic-native/safari-view-controller/ngx'
+import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { SafariViewController } from '@ionic-native/safari-view-controller/ngx'
     StatusBar,
     SplashScreen,
     SafariViewController,
+    InAppBrowser,
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

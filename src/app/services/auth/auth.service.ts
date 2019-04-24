@@ -11,6 +11,7 @@ export class AuthService {
 
   private guestUserSession: GuestSession;
   private userSession: UserSession;
+  private sessionID: String;
 
   constructor(private http: HttpClient, private coreService: CoreService) {
   }
@@ -40,7 +41,7 @@ export class AuthService {
   }
 
   isSessionExist(): boolean {
-    let user = localStorage.getItem('userCredentials');
+    let user = localStorage.getItem('userSession');
     if (user) {
       return true;
     }
@@ -50,10 +51,13 @@ export class AuthService {
   }
 
   getSessionID() {
-    let user = localStorage.getItem('userCredentials');
-    let guestSessionID = localStorage.getItem('guestSessionID');
-
-    return user ? user : guestSessionID;
+    if(this.sessionID) {
+      return this.sessionID;
+    }
+    else {
+      this.sessionID = localStorage.getItem('sessionID');
+      return this.sessionID;
+    }
   }
 
   createGuestSession() {
@@ -135,5 +139,6 @@ export class AuthService {
     }
     return this.userSession;
   }
+
 
 }

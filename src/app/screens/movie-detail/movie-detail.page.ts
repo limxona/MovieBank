@@ -20,12 +20,14 @@ export class MovieDetailPage implements OnInit {
   castList: Cast[] = [];
   similarMovies: Movie[] = [];
   rate: number = 0;
+  private isFavorite: Boolean = false;
+  private isOnWatchlist: Boolean = false;
 
   constructor(private navCtrl: NavController,
-     private activatedRoute: ActivatedRoute, 
-     private movieService: MovieService,
-     private accountService: AccountService,
-     private modalController: ModalController) { }
+    private activatedRoute: ActivatedRoute,
+    private movieService: MovieService,
+    private accountService: AccountService,
+    private modalController: ModalController) { }
 
 
   ngOnInit() {
@@ -36,7 +38,7 @@ export class MovieDetailPage implements OnInit {
       this.getSimilarMovies();
       this.getMovieTrailer();
       this.getAccountStateForMovie();
-      
+
     }, 500);
   }
 
@@ -44,27 +46,30 @@ export class MovieDetailPage implements OnInit {
     this.navCtrl.pop();
   }
 
-  addMovieToList(){
+  addMovieToList() {
     this.accountService.addMovieToList().subscribe(d => {
       console.log("AddMovie: ", d);
+
     });
   }
 
   likeMovie() {
-    this.accountService.markAsFavorite(Number(this.movieID), 'movie', true).subscribe(d => {
+    this.accountService.markAsFavorite(Number(this.movieID), 'movie', !this.isFavorite).subscribe(d => {
       console.log("Favorite Result: ", d);
+      this.isFavorite = d;
     });
   }
 
   addMovieToWatchList() {
     console.log("Watch List");
-    this.accountService.addToWatchList(Number(this.movieID), 'movie', true).subscribe(d => {
+    this.accountService.addToWatchList(Number(this.movieID), 'movie', !this.isOnWatchlist).subscribe(d => {
       console.log(d);
+      this.isOnWatchlist = d;
     });
   }
 
   rateMovie(i: any) {
-    if(i == this.rate) {
+    if (i == this.rate) {
       this.rate = 0;
       this.accountService.deleteRate(this.movieID).subscribe(d => { console.log(d); });
     }
@@ -89,18 +94,21 @@ export class MovieDetailPage implements OnInit {
     this.movieService.getMovieDetail(this.movieID).subscribe(d => {
       console.log(d);
       this.movie = d;
-    })
-
+    });
   }
 
   getAccountStateForMovie() {
-    this.movieService.getAccountStateForMovie(this.movieID).subscribe(d => {});
+    this.movieService.getAccountStateForMovie(this.movieID).subscribe(d => {
+      console.log(d);
+      this.isOnWatchlist = d.watchlist;
+      this.isFavorite = d.favorite;
+    });
   }
 
   getMovieCast() {
     this.movieService.getMovieCast(this.movieID).subscribe(d => {
       let tmpCastList = d.cast as Cast[];
-      this.castList = tmpCastList.length > 10 ? tmpCastList.slice(0,10) : tmpCastList;
+      this.castList = tmpCastList.length > 10 ? tmpCastList.slice(0, 10) : tmpCastList;
 
       console.log(this.castList);
     });

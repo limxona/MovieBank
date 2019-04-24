@@ -34,3 +34,10 @@ export interface Movie {
   vote_average: number;
   vote_count: number;
 }
+
+export interface MovieStates {
+  favorite: Boolean,
+  id: Number,
+  rated: Boolean,
+  watchlist: Boolean
+}

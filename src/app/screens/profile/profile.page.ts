@@ -72,10 +72,10 @@ export class ProfilePage implements OnInit {
   }
 
   login() {
-    this.authService.createRequestToken().subscribe(d => {
+    /* this.authService.createRequestToken().subscribe(d => {
       console.log('Request Token: ', d);
       if(d != false) {
-        d.subscribe((result: any) => {
+         d.subscribe((result: any) => {
           alert(result.event);
           if (result.event === 'closed') { 
             alert("kapatıldı.");
@@ -90,20 +90,21 @@ export class ProfilePage implements OnInit {
       }
       
 
-    });
+    }); */
 
-   /*  this.coreService.showBrowser('sada');
+   // this.coreService.showBrowser('sada');
     
     let requestToken = localStorage.getItem('requestToken');
     this.authService.createSession(requestToken).subscribe(d => {
       console.log(d);
       localStorage.setItem('sessionID', d.session_id);
-    }); */
+    });
 
   }
 
   checkSession() {
     this.isSessionExist = this.authService.checkUserSession();
+    console.log(this.isSessionExist);
     return this.isSessionExist;
   }
 
