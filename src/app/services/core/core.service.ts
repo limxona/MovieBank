@@ -26,7 +26,7 @@ export class CoreService {
   showBrowser(url: string) {
 
 
-      const browser = this.inAppBrowser.create(url, '_system');
+      const browser = this.inAppBrowser.create(url, '_blank');
 
       try {
         browser.on('exit').subscribe(event => {

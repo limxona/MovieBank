@@ -12,7 +12,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomHttpInterceptor } from './core/custom-http.interceptor';
 
 import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { ListPageModule } from './screens/modals/list/list.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,13 +24,16 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ListPageModule
   ],
   providers: [
+    Keyboard,
     StatusBar,
     SplashScreen,
     SafariViewController,
     InAppBrowser,
+    SocialSharing,
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

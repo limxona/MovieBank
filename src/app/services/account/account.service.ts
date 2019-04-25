@@ -33,9 +33,9 @@ export class AccountService {
   }
 
   private getUser() {
-    if(this.user) {
+    if (this.user) {
       return this.user;
-    } 
+    }
     else {
       this.user = JSON.parse(localStorage.getItem('userSession')) as User;
       return this.user
@@ -43,14 +43,14 @@ export class AccountService {
   }
 
   getCreatedLists() {
-    let accountID = this.user.id;
+    let accountID = this.getUser().id;
     let url = 'account/' + accountID + '/lists';
 
     var queryParams = {
       session_id: localStorage.getItem('sessionID')
     }
 
-    return this.http.get(url, {params: queryParams}).pipe(
+    return this.http.get(url, { params: queryParams }).pipe(
       map((response: UserListResponse) => {
         return response.results;
       })
@@ -58,15 +58,15 @@ export class AccountService {
 
   }
 
-  getFavoriteMovies() { 
-    let accountID = this.user.id;
-    let url = 'account/'+accountID+'/favorite/movies';
+  getFavoriteMovies() {
+    let accountID = this.getUser().id;
+    let url = 'account/' + accountID + '/favorite/movies';
 
     var queryParams = {
       session_id: localStorage.getItem('sessionID')
     }
 
-    return this.http.get(url, {params: queryParams}).pipe(
+    return this.http.get(url, { params: queryParams }).pipe(
       map((response: MovieResponse) => {
         console.log("Favorite Movies: ", response);
         return response.results;
@@ -76,10 +76,10 @@ export class AccountService {
 
   getRatedMovies() { }
 
-  getMovieWatchList() { 
-    
-    let accountID = this.user.id;
-    let url = 'account/'+accountID+'/watchlist/movies';
+  getMovieWatchList() {
+
+    let accountID = this.getUser().id;
+    let url = 'account/' + accountID + '/watchlist/movies';
 
     var queryParams = {
       session_id: localStorage.getItem('sessionID')
@@ -93,14 +93,29 @@ export class AccountService {
 
   }
 
-  addMovieToList(): Observable<boolean> {
+  addMovieToList(listID: String | Number, movieID: String | Number): Observable<boolean> {
+
     let isSessionExist = this.authService.checkUserSession();
     if (!isSessionExist) {
       this.coreService.showAlertMessage('You should login to app for add item to your lists!');
       return Observable.create((o: any) => { o.next(false); o.complete(); });
     }
     else {
-      return new Observable<true>();
+      let url = `list/${listID}/add_item`;
+      let params = { media_id: movieID };
+      let queryParams: any = { session_id: this.authService.getSessionID() }
+      return this.http.post(url, params, {params: queryParams}).pipe(
+        map((response: any) => {
+          console.log("Add To list : ", response);
+          if (response.status_code == 12) {
+            return true;
+          }
+          else if (response.status_code == 13) {
+            return false;
+          }
+        })
+      );
+      //return new Observable<true>();
     }
   }
 
@@ -125,10 +140,10 @@ export class AccountService {
       return this.http.post(url, params, { params: queryParams }).pipe(
         map((response: any) => {
           console.log("Add To WatchList : ", response);
-          if(response.status_code == 1) {
+          if (response.status_code == 1) {
             return true;
           }
-          else if(response.status_code == 13) {
+          else if (response.status_code == 13) {
             return false;
           }
         })
@@ -157,10 +172,10 @@ export class AccountService {
       return this.http.post(url, params, { params: queryParams }).pipe(
         map((response: any) => {
           console.log("Mark Favorite : ", response);
-          if(response.status_code == 1) {
+          if (response.status_code == 1) {
             return true;
           }
-          else if(response.status_code == 13) {
+          else if (response.status_code == 13) {
             return false;
           }
         })
@@ -170,17 +185,17 @@ export class AccountService {
   }
 
   rateMovie(movieID: string, rate: number) {
-    let url = 'movie/'+movieID+'/rating';
-    let guestSessionID = localStorage.getItem('guestSessionID');
+    let url = 'movie/' + movieID + '/rating';
+    let sessionID = this.authService.getSessionID();
     let params = {
-      value: rate
+      value: rate * 2
     }
-    let queryString = {
-      guest_session_id: guestSessionID,
-      session_id: ""
+    let queryString: any = {
+      guest_session_id: null,
+      session_id: sessionID
     }
 
-    return this.http.post(url, params, {params: queryString}).pipe(
+    return this.http.post(url, params, { params: queryString }).pipe(
       map((response: any) => {
         console.log("Rate Response : ", response);
         return true;
@@ -189,15 +204,15 @@ export class AccountService {
   }
 
   deleteRate(movieID: string) {
-    let url = 'movie/'+movieID+'/rating';
-    let guestSessionID = localStorage.getItem('guestSessionID');
+    let url = 'movie/' + movieID + '/rating';
+    let sessionID = this.authService.getSessionID();
 
-    let queryString = {
-      guest_session_id: guestSessionID,
-      session_id: ""
+    let queryString: any = {
+      guest_session_id: null,
+      session_id: sessionID
     }
 
-    return this.http.delete(url, {params: queryString}).pipe(
+    return this.http.delete(url, { params: queryString }).pipe(
       map((response: any) => {
         console.log("Dete Rate Response : ", response);
         return true;
@@ -205,18 +220,6 @@ export class AccountService {
     );
   }
 
-  
 
-  /* 
-    Get Created Lists
-    Get Favorite Movies
-    Get Favorite TV Shows
-    Mark as Favorite
-    Get Rated Movies
-    Get Rated TV Shows
-    Get Rated TV Episodes
-    Get Movie Watchlist
-    Get TV Show Watchlist
-    Add to Watchlist
-  */
+
 }

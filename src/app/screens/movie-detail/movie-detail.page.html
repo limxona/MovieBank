@@ -1,15 +1,16 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title *ngIf="movie">{{movie.title}}</ion-title>
+
+ <ion-header translucent>
+  <ion-toolbar translucent style="--background: #ffffff00;">
+    <ion-back-button></ion-back-button>
   </ion-toolbar>
 </ion-header>
- -->
-<ion-content>
 
-  <div class="back-button-content" (click)="navigateBack();">
+<ion-content fullscreen> 
+
+  <!-- <div class="back-button-content" (click)="navigateBack();">
     <ion-icon name="arrow-back"></ion-icon>
   </div>
-
+ -->
 
   <div *ngIf="movie" class="content">
 

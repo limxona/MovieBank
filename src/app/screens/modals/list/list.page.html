@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Your Movie Lists</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close" style="color: #cd4851;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <div class="content">
+    <div class="list-item" *ngFor="let item of userLists" [ngClass]="{'selected': item.id == selectedListID}" (click)="selectList(item);">
+      {{item.name}}
+    </div>
+  </div>
+
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-button expand="full" fill="clear" class="save-button" (click)="saveMovie()">
+            Save
+          </ion-button>
+    </ion-toolbar>
+  </ion-footer>

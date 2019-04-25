@@ -6,11 +6,14 @@ import { MovieService } from 'src/app/services/movie/movie.service';
 import { Cast } from 'src/app/models/cast';
 import { NavController, ModalController } from '@ionic/angular';
 import { AccountService } from 'src/app/services/account/account.service';
+import { CoreService } from 'src/app/services/core/core.service';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { ListPage } from '../modals/list/list.page';
 
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.page.html',
-  styleUrls: ['./movie-detail.page.scss'],
+  styleUrls: ['./movie-detail.page.scss']
 })
 export class MovieDetailPage implements OnInit {
 
@@ -27,7 +30,9 @@ export class MovieDetailPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private movieService: MovieService,
     private accountService: AccountService,
-    private modalController: ModalController) { }
+    private modalController: ModalController,
+    private socialSharing: SocialSharing,
+    private coreService: CoreService) { }
 
 
   ngOnInit() {
@@ -46,24 +51,34 @@ export class MovieDetailPage implements OnInit {
     this.navCtrl.pop();
   }
 
-  addMovieToList() {
-    this.accountService.addMovieToList().subscribe(d => {
-      console.log("AddMovie: ", d);
-
+  async addMovieToList() {
+    console.log("asdasd");
+    const modal = await this.modalController.create({
+      component: ListPage,
+      componentProps: {
+        movieID: this.movieID
+      }
     });
+
+    modal.present();
+
+
+
+
+
+    /* this.accountService.addMovieToList().subscribe(d => {
+      console.log("AddMovie: ", d);
+    }); */
   }
 
   likeMovie() {
     this.accountService.markAsFavorite(Number(this.movieID), 'movie', !this.isFavorite).subscribe(d => {
-      console.log("Favorite Result: ", d);
       this.isFavorite = d;
     });
   }
 
   addMovieToWatchList() {
-    console.log("Watch List");
     this.accountService.addToWatchList(Number(this.movieID), 'movie', !this.isOnWatchlist).subscribe(d => {
-      console.log(d);
       this.isOnWatchlist = d;
     });
   }
@@ -76,32 +91,40 @@ export class MovieDetailPage implements OnInit {
     else {
       this.rate = i;
       this.accountService.rateMovie(this.movieID, this.rate).subscribe(d => {
-
       });
     }
-    console.log("Rate List :", i);
   }
 
   showMovieTrailer() {
-    console.log("Trailer URL :", this.trailerURL);
+    this.coreService.showBrowser(this.trailerURL);
   }
 
   shareMovie() {
-    console.log("share Movie");
+    console.log("share Movie ", this.movie);
+    let url = `https://www.themoviedb.org/movie/${this.movie.id}`;
+    this.socialSharing.share(this.movie.title, this.movie.overview, null, url).then((d) => {
+      console.log(d);
+      // Sharing via email is possible
+    }).catch((err) => {
+      // Sharing via email is not possible
+      console.log(err);
+
+    });
+    
   }
 
   getMovieDetail() {
     this.movieService.getMovieDetail(this.movieID).subscribe(d => {
-      console.log(d);
       this.movie = d;
     });
   }
 
   getAccountStateForMovie() {
     this.movieService.getAccountStateForMovie(this.movieID).subscribe(d => {
-      console.log(d);
       this.isOnWatchlist = d.watchlist;
       this.isFavorite = d.favorite;
+      this.rate = d.rated == false ? 0 : d.rated.value / 2;
+      console.log(this.rate);
     });
   }
 
@@ -109,8 +132,6 @@ export class MovieDetailPage implements OnInit {
     this.movieService.getMovieCast(this.movieID).subscribe(d => {
       let tmpCastList = d.cast as Cast[];
       this.castList = tmpCastList.length > 10 ? tmpCastList.slice(0, 10) : tmpCastList;
-
-      console.log(this.castList);
     });
   }
 
