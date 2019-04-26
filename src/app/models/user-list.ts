@@ -1,3 +1,5 @@
+import { Movie } from './movie';
+
 export interface UserListResponse {
     page: number,
     results: UserList[]
@@ -14,4 +16,16 @@ export interface UserList {
     list_type: string,
     name: string,
     poster_path: string
+}
+
+export interface ListDetail {
+    created_by: String,
+    description: String,
+    favorite_count: Number,
+    id: String,
+    iso_639_1: String,
+    item_count: Number,
+    items: Movie[],
+    name: String,
+    poster_path: String
 }

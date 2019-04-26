@@ -21,7 +21,8 @@
   <div *ngIf="isSessionExist">
     <div class="account-info">
       <div class="account-picture">
-        <img src="https://www.gravatar.com/avatar/bfe90ba6a545766dfba93673d254c730" onError="this.src = '../assets/images/no-image-poster.png'" />
+        <img src="https://www.gravatar.com/avatar/bfe90ba6a545766dfba93673d254c730"
+          onError="this.src = '../assets/images/no-image-poster.png'" />
       </div>
 
       <div class="account-name">
@@ -51,7 +52,10 @@
     <div class="menu-content">
 
       <div class="user-list-content" *ngIf="selectedMenu == 'list'">
-        <div class="list" *ngFor="let list of userLists">
+        <div class="add-new-list">
+          <ion-icon name="add" (click)="addNewList();"></ion-icon>
+        </div>
+        <div class="list" *ngFor="let list of userLists" (click)="showListDetail(list)">
           <span class="title">
             {{list.name}}
           </span>
@@ -62,33 +66,37 @@
       </div>
 
       <div class="user-watchlist-content" *ngIf="selectedMenu == 'watchlist'">
-        <div class="watchlist-item" *ngFor="let movie of userWatchList">
-          <div class="item-image">
-              <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" onError="this.src = '../assets/images/no-image-poster.png'" />
-          </div>
-          <div class="title">
-            <span>{{movie.title}} ({{movie.release_date | date: 'yyyy'}})</span>
+        <div class="movie-list">
+          <div class="list-item" *ngFor="let item of userWatchList">
+            <div class="movie-poster">
+              <img src="https://image.tmdb.org/t/p/w500/{{item.poster_path}}"
+                onError="this.src = '../assets/images/no-image-poster.png'" />
+            </div>
+            <div class="movie-info">
+              <span class="title">{{item.title}}</span>
+            </div>
+            <div class="action" (click)="removeFromWatchList(item)">
+              <ion-icon name="bookmark"></ion-icon>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="user-watchlist-content" *ngIf="selectedMenu == 'favorite'">
-          <div class="watchlist-item" *ngFor="let movie of userFavoriteList">
-            <div class="item-image">
-                <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" onError="this.src = '../assets/images/no-image-poster.png'" />
-            </div>
-            <div class="title">
-              <span>{{movie.title}} ({{movie.release_date | date: 'yyyy'}})</span>
-            </div>
+        <div class="list-item" *ngFor="let item of userFavoriteList">
+          <div class="movie-poster">
+            <img src="https://image.tmdb.org/t/p/w500/{{item.poster_path}}"
+              onError="this.src = '../assets/images/no-image-poster.png'" />
+          </div>
+          <div class="movie-info">
+            <span class="title">{{item.title}}</span>
+          </div>
+          <div class="action" (click)="removeFromFavoriteList(item)">
+            <ion-icon name="heart"></ion-icon>
           </div>
         </div>
-
+      </div>
     </div>
-
-
-
-
-
   </div>
 
 

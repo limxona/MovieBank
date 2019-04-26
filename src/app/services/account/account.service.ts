@@ -32,7 +32,7 @@ export class AccountService {
 
   }
 
-  private getUser() {
+  getUser() {
     if (this.user) {
       return this.user;
     }
@@ -42,21 +42,7 @@ export class AccountService {
     }
   }
 
-  getCreatedLists() {
-    let accountID = this.getUser().id;
-    let url = 'account/' + accountID + '/lists';
-
-    var queryParams = {
-      session_id: localStorage.getItem('sessionID')
-    }
-
-    return this.http.get(url, { params: queryParams }).pipe(
-      map((response: UserListResponse) => {
-        return response.results;
-      })
-    );
-
-  }
+  
 
   getFavoriteMovies() {
     let accountID = this.getUser().id;
@@ -93,31 +79,6 @@ export class AccountService {
 
   }
 
-  addMovieToList(listID: String | Number, movieID: String | Number): Observable<boolean> {
-
-    let isSessionExist = this.authService.checkUserSession();
-    if (!isSessionExist) {
-      this.coreService.showAlertMessage('You should login to app for add item to your lists!');
-      return Observable.create((o: any) => { o.next(false); o.complete(); });
-    }
-    else {
-      let url = `list/${listID}/add_item`;
-      let params = { media_id: movieID };
-      let queryParams: any = { session_id: this.authService.getSessionID() }
-      return this.http.post(url, params, {params: queryParams}).pipe(
-        map((response: any) => {
-          console.log("Add To list : ", response);
-          if (response.status_code == 12) {
-            return true;
-          }
-          else if (response.status_code == 13) {
-            return false;
-          }
-        })
-      );
-      //return new Observable<true>();
-    }
-  }
 
   addToWatchList(mediaID: Number, mediaType: String, actionType: Boolean): Observable<Boolean> {
 

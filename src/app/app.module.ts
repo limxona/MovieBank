@@ -16,6 +16,8 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { ListPageModule } from './screens/modals/list/list.module';
+import { ListDetailPageModule } from './screens/modals/list-detail/list-detail.module';
+import { AddListPageModule } from './screens/modals/add-list/add-list.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +27,9 @@ import { ListPageModule } from './screens/modals/list/list.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    ListPageModule
+    ListPageModule,
+    ListDetailPageModule,
+    AddListPageModule
   ],
   providers: [
     Keyboard,

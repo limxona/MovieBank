@@ -5,6 +5,10 @@ import { User } from 'src/app/models/user';
 import { UserList } from 'src/app/models/user-list';
 import { Movie } from 'src/app/models/movie';
 import { CoreService } from 'src/app/services/core/core.service';
+import { ModalController } from '@ionic/angular';
+import { ListDetailPage } from '../modals/list-detail/list-detail.page';
+import { ListService } from 'src/app/services/list/list.service';
+import { AddListPage } from '../modals/add-list/add-list.page';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +26,9 @@ export class ProfilePage implements OnInit {
   constructor(
     private authService: AuthService, 
     private accountService: AccountService,
-    private coreService: CoreService) { }
+    private listService: ListService,
+    private coreService: CoreService,
+    private modalController: ModalController) { }
 
   ngOnInit() {
     if(this.checkSession()){
@@ -38,7 +44,7 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  changeTab(selectedTab: string) {
+  private changeTab(selectedTab: string) {
     console.log(selectedTab);
     this.selectedMenu = selectedTab;
     if(selectedTab == 'list') {
@@ -60,7 +66,7 @@ export class ProfilePage implements OnInit {
   }
 
   private getAccountLists() {
-    this.accountService.getCreatedLists().subscribe(list => {
+    this.listService.getCreatedLists().subscribe(list => {
       this.userLists = list;
     }); 
   }
@@ -68,6 +74,41 @@ export class ProfilePage implements OnInit {
   private getAccountFavoriteMovies() {
     this.accountService.getFavoriteMovies().subscribe(list => {
       this.userFavoriteList = list;
+    });
+  }
+
+  private async addNewList() {
+    const modal = await this.modalController.create({
+      component: AddListPage
+    });
+    modal.present();
+  }
+
+  private async showListDetail(list: UserList) {
+    const modal = await this.modalController.create({
+      component: ListDetailPage,
+      componentProps: {
+        userList: list
+      }
+    });
+
+    modal.present();
+  }
+
+  private removeFromFavoriteList(movie: Movie) {
+    console.log(movie);
+    this.accountService.markAsFavorite(Number(movie.id), 'movie', false).subscribe(d => {
+      if(!d) {
+        this.getAccountFavoriteMovies();
+      }
+    });
+  }
+
+  private removeFromWatchList(movie: Movie) {
+    this.accountService.addToWatchList(Number(movie.id), 'movie', false).subscribe(d => {
+      if(!d) {
+        this.getAccountWatchList();
+      }
     });
   }
 

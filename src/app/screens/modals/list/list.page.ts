@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AccountService } from 'src/app/services/account/account.service';
 import { UserList } from 'src/app/models/user-list';
+import { ListService } from 'src/app/services/list/list.service';
 
 @Component({
   selector: 'app-list',
@@ -16,7 +17,7 @@ export class ListPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private accountService: AccountService
+    private listService: ListService
     ) { }
 
   ngOnInit() {
@@ -26,7 +27,7 @@ export class ListPage implements OnInit {
   }
 
   getUserLists() {
-    this.accountService.getCreatedLists().subscribe(d => {
+    this.listService.getCreatedLists().subscribe(d => {
       console.log(d);
       this.userLists = d;
     });
@@ -37,7 +38,7 @@ export class ListPage implements OnInit {
   }
 
   private saveMovie() {
-    this.accountService.addMovieToList(this.selectedListID, this.movieID).subscribe(result => {
+    this.listService.addMovieToList(this.selectedListID, this.movieID).subscribe(result => {
       if(result) {
         this.closeModal();
       }

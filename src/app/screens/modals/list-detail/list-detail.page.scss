@@ -1,0 +1,45 @@
+.movie-list {
+    color: white;
+
+    .list-item {
+        display: flex;
+        margin-right: 10px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #353535;
+
+        .movie-poster {
+            width: 50px;
+            height: 75px;
+
+            img {
+                width: 50px;
+                height: 75px;
+                border-radius: 10px;
+            }
+        }
+
+        .movie-info {
+            width: calc(100% - 100px);
+            padding-left: 10px;
+            padding-right: 10px;
+            font-size: 14px;
+        }
+
+        .action {
+            width: 50px;
+            height: 75px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            ion-icon {
+                font-size: 30px;
+                font-weight: bold;
+                color: #cd4851;
+            }
+        }
+    }
+}

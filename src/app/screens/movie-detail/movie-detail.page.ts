@@ -62,13 +62,6 @@ export class MovieDetailPage implements OnInit {
 
     modal.present();
 
-
-
-
-
-    /* this.accountService.addMovieToList().subscribe(d => {
-      console.log("AddMovie: ", d);
-    }); */
   }
 
   likeMovie() {
