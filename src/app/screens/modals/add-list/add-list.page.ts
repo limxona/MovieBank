@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { ListService } from 'src/app/services/list/list.service';
 
 @Component({
   selector: 'app-add-list',
@@ -8,13 +9,21 @@ import { ModalController } from '@ionic/angular';
 })
 export class AddListPage implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  title: String = '';
+  description: String = '';
+  constructor(private modalController: ModalController, private listService: ListService) { }
 
   ngOnInit() {
   }
 
   createNewList() {
-
+    console.log(this.title, this.description);
+    this.listService.createList(this.title, this.description).subscribe(result => {
+      console.log(result);
+      if(result) {
+        this.closeModal();
+      }
+    });
   }
 
   closeModal() {

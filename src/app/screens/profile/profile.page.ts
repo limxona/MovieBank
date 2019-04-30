@@ -24,15 +24,21 @@ export class ProfilePage implements OnInit {
   userWatchList: Movie[] = [];
   userFavoriteList: Movie[] = [];
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private accountService: AccountService,
     private listService: ListService,
     private coreService: CoreService,
     private modalController: ModalController) { }
 
   ngOnInit() {
-    if(this.checkSession()){
+    if (this.checkSession()) {
       this.getAccountDetails();
+    }
+  }
+
+  ionViewWillEnter(){
+    if (this.checkSession()) {
+      this.getAccountLists();
     }
   }
 
@@ -40,23 +46,23 @@ export class ProfilePage implements OnInit {
     this.accountService.getAccountDetails().subscribe(d => {
       console.log("Account Detail: ", d);
       this.loggedUser = d;
-      this.getAccountLists(); 
+      this.getAccountLists();
     });
   }
 
   private changeTab(selectedTab: string) {
     console.log(selectedTab);
     this.selectedMenu = selectedTab;
-    if(selectedTab == 'list') {
+    if (selectedTab == 'list') {
       this.getAccountLists();
     }
-    else if(selectedTab == 'watchlist') {
+    else if (selectedTab == 'watchlist') {
       this.getAccountWatchList();
     }
-    else if(selectedTab == 'favorite') {
+    else if (selectedTab == 'favorite') {
       this.getAccountFavoriteMovies();
     }
-    else {}
+    else { }
   }
 
   private getAccountWatchList() {
@@ -68,7 +74,7 @@ export class ProfilePage implements OnInit {
   private getAccountLists() {
     this.listService.getCreatedLists().subscribe(list => {
       this.userLists = list;
-    }); 
+    });
   }
 
   private getAccountFavoriteMovies() {
@@ -79,9 +85,15 @@ export class ProfilePage implements OnInit {
 
   private async addNewList() {
     const modal = await this.modalController.create({
-      component: AddListPage
+      component: AddListPage,
+
     });
+
     modal.present();
+    
+    modal.onDidDismiss().then(d => {
+      this.getAccountLists();
+    }).catch(err => { });
   }
 
   private async showListDetail(list: UserList) {
@@ -98,7 +110,7 @@ export class ProfilePage implements OnInit {
   private removeFromFavoriteList(movie: Movie) {
     console.log(movie);
     this.accountService.markAsFavorite(Number(movie.id), 'movie', false).subscribe(d => {
-      if(!d) {
+      if (!d) {
         this.getAccountFavoriteMovies();
       }
     });
@@ -106,40 +118,45 @@ export class ProfilePage implements OnInit {
 
   private removeFromWatchList(movie: Movie) {
     this.accountService.addToWatchList(Number(movie.id), 'movie', false).subscribe(d => {
-      if(!d) {
+      if (!d) {
         this.getAccountWatchList();
       }
     });
   }
 
   login() {
-    /* this.authService.createRequestToken().subscribe(d => {
+    this.authService.createRequestToken().subscribe(d => {
       console.log('Request Token: ', d);
-      if(d != false) {
-         d.subscribe((result: any) => {
+      if (d != false) {
+        /* d.subscribe((result: any) => {
           alert(result.event);
-          if (result.event === 'closed') { 
+          if (result.event === 'closed') {
             alert("kapatıldı.");
           }
         },
-          (error: any) => alert('error')
-        );
+          (error: any) => console.log(error)
+        ); */
+
+        let url = 'https://www.themoviedb.org/authenticate/' + d;
+        this.coreService.showBrowser(url);
+        
+
 
       }
       else {
         alert("1");
       }
-      
 
-    }); */
 
-   // this.coreService.showBrowser('sada');
-    
-    let requestToken = localStorage.getItem('requestToken');
+    });
+
+    // this.coreService.showBrowser('sada');
+
+    /* let requestToken = localStorage.getItem('requestToken');
     this.authService.createSession(requestToken).subscribe(d => {
       console.log(d);
       localStorage.setItem('sessionID', d.session_id);
-    });
+    }); */
 
   }
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +9,8 @@ export class CoreService {
 
   constructor(
     private alertController: AlertController,
-    private safariViewController: SafariViewController,
-    private inAppBrowser: InAppBrowser) { }
+    private safariViewController: SafariViewController
+  ) { }
 
   async showAlertMessage(message: string) {
     const alert = await this.alertController.create({
@@ -26,44 +25,49 @@ export class CoreService {
   showBrowser(url: string) {
 
 
-      const browser = this.inAppBrowser.create(url, '_blank');
+    /* const browser = this.inAppBrowser.create(url, '_blank');
 
-      try {
-        browser.on('exit').subscribe(event => {
-          console.log(event);
-          alert(event);
-        });
-      } catch (e) {
-        console.log(e);
-        alert('heyyo');
-      }
-      
-
-      //browser.close();
+    try {
+      browser.on('exit').subscribe(event => {
+        console.log(event);
+        alert(event);
+      });
+    } catch (e) {
+      console.log(e);
+      //alert('heyyo');
+    }
     
 
-    /* return this.safariViewController.show({
-      url: url,
-      hidden: false,
-      animated: false,
-      transition: 'curl',
-      enterReaderModeIfAvailable: true,
-      tintColor: '#cd4851',
-      toolbarColor: '#cd4851'
-    }); */
+    //browser.close(); */
 
 
-    /* this.safariViewController.isAvailable()
+    this.safariViewController.isAvailable()
       .then((available: boolean) => {
-        if (available) {
+          if (available) {
 
-          
+            this.safariViewController.show({
+              url: url,
+              hidden: false,
+              animated: false,
+              transition: 'curl',
+              enterReaderModeIfAvailable: true,
+              tintColor: '#ff0000'
+            })
+            .subscribe((result: any) => {
+                if(result.event === 'opened') console.log('Opened');
+                else if(result.event === 'loaded') console.log('Loaded');
+                else if(result.event === 'closed') console.log('Closed');
+              },
+              (error: any) => console.error(error)
+            );
 
-        } else {
-          // use fallback browser, example InAppBrowser
-        }
-      }
-      ); */
+          } else {
+            // use fallback browser, example InAppBrowser
+          }
+        });
+
+
+   
   }
 
 }

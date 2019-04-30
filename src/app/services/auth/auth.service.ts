@@ -71,8 +71,9 @@ export class AuthService {
     return this.http.get("/authentication/token/new").pipe(
       map((response: RequestToken) => {
         if (response.success) {
-          let url = 'https://www.themoviedb.org/authenticate/' + response.request_token;
-           return this.coreService.showBrowser(url);
+          //let url = 'https://www.themoviedb.org/authenticate/' + response.request_token;
+           //return this.coreService.showBrowser(url);
+           return response.request_token;
         }
         else {
           return false;

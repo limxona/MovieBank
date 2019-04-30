@@ -101,8 +101,19 @@ export class ListService {
 
   }
 
-  createList() {
-
+  createList(name: String, description: String) {
+    let queryParams: any = {
+      session_id: this.authService.getSessionID()
+    }
+    let requestBody = {
+      name: name,
+      description: description
+    }
+    return this.http.post('list', requestBody, {params: queryParams}).pipe(
+      map((response: any) => {
+        return true;
+      })
+    );
   }
 
   deleteList() {

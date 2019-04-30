@@ -1,4 +1,39 @@
-
 .save-button {
     color: #cd4851;
+}
+
+.form-content {
+    width: 100%;
+
+    .form-component {
+        padding: 0 20px;
+        margin-bottom: 20px;
+        width: 100%;
+        display: flex;
+        flex-flow: column;
+
+        .form-label {
+            padding: 10px 0px;
+            color: white;
+        }
+
+        .form-input, .form-input:focus {
+            height: 35px;
+            padding: 10px;
+            background-color: #353535;
+            color: white;
+            border-color: #353535;
+            border: none;
+
+        }
+
+        .form-textarea {
+            height: 100px;
+            padding: 10px;
+            background-color: #353535;
+            color: white;
+            border-color: #353535;
+            border: none;
+        }
+    }
 }
