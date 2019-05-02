@@ -9,8 +9,8 @@ import { ListService } from 'src/app/services/list/list.service';
 })
 export class AddListPage implements OnInit {
 
-  title: String = '';
-  description: String = '';
+  title: string = '';
+  description: string = '';
   constructor(private modalController: ModalController, private listService: ListService) { }
 
   ngOnInit() {

@@ -23,8 +23,8 @@ export class MovieDetailPage implements OnInit {
   castList: Cast[] = [];
   similarMovies: Movie[] = [];
   rate: number = 0;
-  private isFavorite: Boolean = false;
-  private isOnWatchlist: Boolean = false;
+  private isFavorite: boolean = false;
+  private isOnWatchlist: boolean = false;
 
   constructor(private navCtrl: NavController,
     private activatedRoute: ActivatedRoute,

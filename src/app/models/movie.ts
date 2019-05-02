@@ -36,8 +36,8 @@ export interface Movie {
 }
 
 export interface MovieStates {
-  favorite: Boolean,
+  favorite: boolean,
   id: Number,
   rated: any,
-  watchlist: Boolean
+  watchlist: boolean
 }

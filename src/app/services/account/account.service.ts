@@ -21,15 +21,13 @@ export class AccountService {
 
   getAccountDetails() {
     var params = { 'session_id': localStorage.getItem('sessionID') };
-    return this.http.get('account', { params: params }).pipe(
+    return this.http.get('/account', { params: params }).pipe(
       map((response: any) => {
         this.user = response;
         localStorage.setItem('userSession', JSON.stringify(response));
-        console.log(this.user);
         return response as User;
       })
     );
-
   }
 
   getUser() {
@@ -42,11 +40,9 @@ export class AccountService {
     }
   }
 
-  
-
   getFavoriteMovies() {
     let accountID = this.getUser().id;
-    let url = 'account/' + accountID + '/favorite/movies';
+    let url = '/account/' + accountID + '/favorite/movies';
 
     var queryParams = {
       session_id: localStorage.getItem('sessionID')
@@ -54,7 +50,6 @@ export class AccountService {
 
     return this.http.get(url, { params: queryParams }).pipe(
       map((response: MovieResponse) => {
-        console.log("Favorite Movies: ", response);
         return response.results;
       })
     );
@@ -65,22 +60,20 @@ export class AccountService {
   getMovieWatchList() {
 
     let accountID = this.getUser().id;
-    let url = 'account/' + accountID + '/watchlist/movies';
+    let url = '/account/' + accountID + '/watchlist/movies';
 
     var queryParams = {
       session_id: localStorage.getItem('sessionID')
     }
     return this.http.get(url, { params: queryParams }).pipe(
       map((response: MovieResponse) => {
-        console.log("User's WatchList : ", response);
         return response.results;
       })
     );
 
   }
 
-
-  addToWatchList(mediaID: Number, mediaType: String, actionType: Boolean): Observable<Boolean> {
+  addToWatchList(mediaID: number, mediaType: string, actionType: boolean): Observable<boolean> {
 
     let isSessionExist = this.authService.checkUserSession();
     if (!isSessionExist) {
@@ -89,7 +82,7 @@ export class AccountService {
     }
     else {
       let accountID = this.getUser().id;
-      let url = 'account/' + accountID + '/watchlist';
+      let url = '/account/' + accountID + '/watchlist';
       var params = {
         "media_type": "movie",
         "media_id": mediaID,
@@ -100,7 +93,6 @@ export class AccountService {
       }
       return this.http.post(url, params, { params: queryParams }).pipe(
         map((response: any) => {
-          console.log("Add To WatchList : ", response);
           if (response.status_code == 1) {
             return true;
           }
@@ -112,7 +104,7 @@ export class AccountService {
     }
   }
 
-  markAsFavorite(mediaID: Number, mediaType: String, actionType: Boolean): Observable<Boolean> {
+  markAsFavorite(mediaID: number, mediaType: string, actionType: boolean): Observable<boolean> {
 
     let isSessionExist = this.authService.checkUserSession();
     if (!isSessionExist) {
@@ -121,7 +113,7 @@ export class AccountService {
     }
     else {
       let accountID = this.getUser().id;
-      let url = 'account/' + accountID + '/favorite';
+      let url = '/account/' + accountID + '/favorite';
       var params = {
         "media_type": "movie",
         "media_id": mediaID,
@@ -132,7 +124,6 @@ export class AccountService {
       }
       return this.http.post(url, params, { params: queryParams }).pipe(
         map((response: any) => {
-          console.log("Mark Favorite : ", response);
           if (response.status_code == 1) {
             return true;
           }
@@ -146,7 +137,7 @@ export class AccountService {
   }
 
   rateMovie(movieID: string, rate: number) {
-    let url = 'movie/' + movieID + '/rating';
+    let url = '/movie/' + movieID + '/rating';
     let sessionID = this.authService.getSessionID();
     let params = {
       value: rate * 2
@@ -165,7 +156,7 @@ export class AccountService {
   }
 
   deleteRate(movieID: string) {
-    let url = 'movie/' + movieID + '/rating';
+    let url = '/movie/' + movieID + '/rating';
     let sessionID = this.authService.getSessionID();
 
     let queryString: any = {
@@ -180,7 +171,5 @@ export class AccountService {
       })
     );
   }
-
-
 
 }

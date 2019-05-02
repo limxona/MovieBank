@@ -8,3 +8,9 @@ export interface Cast {
   order: number,
   profile_path: string
 }
+
+export interface CastResponse {
+  cast: Cast[],
+  crew: any[],
+  id: number,
+}

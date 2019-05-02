@@ -3,7 +3,7 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, Htt
 
 import { Observable } from 'rxjs';
 import { map, catchError, retry } from 'rxjs/operators';
-import { Config } from '../core/config';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
@@ -12,7 +12,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		request = request.clone({
-			url: `${Config.baseUrl}${request.url}`,
+			url: `${environment.baseUrl}${request.url}`,
 			setParams: {
 				api_key: "3299dd2b83a5ef85bfac9dfe10cb2e17"
 			}

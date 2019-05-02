@@ -11,7 +11,7 @@ export class AuthService {
 
   private guestUserSession: GuestSession;
   private userSession: UserSession;
-  private sessionID: String;
+  private sessionID: string;
 
   constructor(private http: HttpClient, private coreService: CoreService) {
   }

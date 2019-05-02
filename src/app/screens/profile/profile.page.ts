@@ -125,7 +125,7 @@ export class ProfilePage implements OnInit {
   }
 
   login() {
-    this.authService.createRequestToken().subscribe(d => {
+    this.authService.createRequestToken().subscribe((d: any) => {
       console.log('Request Token: ', d);
       if (d != false) {
         /* d.subscribe((result: any) => {
@@ -138,9 +138,18 @@ export class ProfilePage implements OnInit {
         ); */
 
         let url = 'https://www.themoviedb.org/authenticate/' + d;
-        this.coreService.showBrowser(url);
-        
+        this.coreService.showBrowser(url).subscribe((result: any) => {
+          //if(result.event === 'opened') console.log('Opened');
+          //else if(result.event === 'loaded') console.log('Loaded');
+          //else if(result.event === 'closed') console.log('Closed');
 
+          if(result.event === 'closed') {
+            this.createSession(d.requestToken);
+          }
+
+        },
+        (error: any) => console.error(error)
+      );
 
       }
       else {
@@ -158,6 +167,12 @@ export class ProfilePage implements OnInit {
       localStorage.setItem('sessionID', d.session_id);
     }); */
 
+  }
+
+  createSession(requestToken: string) {
+    this.authService.createSession(requestToken).subscribe(result => {
+
+    });
   }
 
   checkSession() {

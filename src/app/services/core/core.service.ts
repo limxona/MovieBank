@@ -36,38 +36,35 @@ export class CoreService {
       console.log(e);
       //alert('heyyo');
     }
-    
 
-    //browser.close(); */
+     //browser.close(); */
+
+    return this.safariViewController.show({
+      url: url,
+      hidden: false,
+      animated: false,
+      transition: 'curl',
+      enterReaderModeIfAvailable: true,
+      tintColor: '#ff0000'
+    })
 
 
-    this.safariViewController.isAvailable()
+
+
+
+
+    /* this.safariViewController.isAvailable()
       .then((available: boolean) => {
           if (available) {
-
-            this.safariViewController.show({
-              url: url,
-              hidden: false,
-              animated: false,
-              transition: 'curl',
-              enterReaderModeIfAvailable: true,
-              tintColor: '#ff0000'
-            })
-            .subscribe((result: any) => {
-                if(result.event === 'opened') console.log('Opened');
-                else if(result.event === 'loaded') console.log('Loaded');
-                else if(result.event === 'closed') console.log('Closed');
-              },
-              (error: any) => console.error(error)
-            );
+            
+            
 
           } else {
             // use fallback browser, example InAppBrowser
           }
-        });
+        }); */
 
 
-   
   }
 
 }

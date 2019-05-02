@@ -12,11 +12,8 @@ export class GenderService {
 
 
   getAllGenders() {
-    console.log("All genders...");
-
-    return this.http.get("genre/movie/list").pipe(
+    return this.http.get("/genre/movie/list").pipe(
       map((response: any) => {
-        console.log(response);
         return response.genres as Array<Gender>;
       })
     );
