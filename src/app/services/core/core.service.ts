@@ -24,21 +24,6 @@ export class CoreService {
 
   showBrowser(url: string) {
 
-
-    /* const browser = this.inAppBrowser.create(url, '_blank');
-
-    try {
-      browser.on('exit').subscribe(event => {
-        console.log(event);
-        alert(event);
-      });
-    } catch (e) {
-      console.log(e);
-      //alert('heyyo');
-    }
-
-     //browser.close(); */
-
     return this.safariViewController.show({
       url: url,
       hidden: false,
@@ -46,24 +31,7 @@ export class CoreService {
       transition: 'curl',
       enterReaderModeIfAvailable: true,
       tintColor: '#ff0000'
-    })
-
-
-
-
-
-
-    /* this.safariViewController.isAvailable()
-      .then((available: boolean) => {
-          if (available) {
-            
-            
-
-          } else {
-            // use fallback browser, example InAppBrowser
-          }
-        }); */
-
+    });
 
   }
 

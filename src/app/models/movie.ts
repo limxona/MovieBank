@@ -1,4 +1,4 @@
-import { Gender } from "./gender";
+import { Genre } from "./genre";
 
 export interface MovieResponse {
   page: number;
@@ -12,7 +12,7 @@ export interface Movie {
   backdrop_path: string;
   belongs_to_collection: any;
   budget: number;
-  genres: Gender;
+  genres: Genre;
   homepage: string;
   id: number;
   imdb_id: string;
@@ -40,4 +40,4 @@ export interface MovieStates {
   id: Number,
   rated: any,
   watchlist: boolean
-}
+} 

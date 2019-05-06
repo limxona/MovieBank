@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GenderService } from 'src/app/services/gender/gender.service';
 import { Observable } from 'rxjs';
-import { Gender } from 'src/app/models/gender';
+import { Genre } from 'src/app/models/genre';
+import { GenreService } from 'src/app/services/genre/genre.service';
 
 @Component({
   selector: 'app-category',
@@ -10,16 +10,16 @@ import { Gender } from 'src/app/models/gender';
 })
 export class CategoryPage implements OnInit {
 
-  genderList: Observable<Gender[]>; 
-  constructor(private genderService: GenderService) { }
+  genderList: Observable<Genre[]>; 
+  constructor(private genreService: GenreService) { }
 
   ngOnInit() {
-    this.getAllGenders();
+    this.getAllGenders(); 
   }
 
 
   getAllGenders() {
-    this.genderList = this.genderService.getAllGenders();
+    this.genderList = this.genreService.getAllGenders();
 
   }
 

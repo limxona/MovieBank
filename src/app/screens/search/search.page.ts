@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { Movie } from 'src/app/models/movie';
-import { GenderService } from 'src/app/services/gender/gender.service';
+import { GenreService } from 'src/app/services/genre/genre.service';
 import { IonSearchbar } from '@ionic/angular';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 
@@ -19,7 +19,7 @@ export class SearchPage implements OnInit {
 
   constructor(
     private movieService: MovieService, 
-    private genderService: GenderService,
+    private genreService: GenreService,
     private keyboard: Keyboard) { }
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class SearchPage implements OnInit {
   }
 
   getAllGenders() {
-    this.genderService.getAllGenders().subscribe(d => {
+    this.genreService.getAllGenders().subscribe(d => {
       console.log(d);
     });
   }

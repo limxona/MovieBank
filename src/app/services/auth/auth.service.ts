@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { GuestSession, RequestToken, UserSession } from 'src/app/models/auth';
 import { CoreService } from '../core/core.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,13 @@ export class AuthService {
   }
 
   checkSession() {
-    if (this.getUserSessionResponse()) { //eğer user var ise burada expiredate'i kontrol edecez.
+    if (this.getUserSessionResponse()) {
       let isUserSessionExpired = this.checkExpireDate(this.userSession.expires_at);
       if (isUserSessionExpired) {
         localStorage.removeItem('userSession');
       }
     }
-    else { //user yok ise guess user var mı bakacaz. 
+    else {
       if (this.getGuestSessionResponse()) {
         let isGuestSessionExpired = this.checkExpireDate(this.guestUserSession.expires_at);
         if (isGuestSessionExpired) {
@@ -36,7 +37,7 @@ export class AuthService {
     }
   }
 
-  checkUserSession() {
+  checkUserSession(): boolean {
     return this.getUserSessionResponse() ? true : false;
   }
 
@@ -50,7 +51,7 @@ export class AuthService {
     }
   }
 
-  getSessionID() {
+  getSessionID(): string {
     if(this.sessionID) {
       return this.sessionID;
     }
@@ -67,12 +68,10 @@ export class AuthService {
     });
   }
 
-  createRequestToken() {
+  createRequestToken(): Observable<string | boolean> {
     return this.http.get("/authentication/token/new").pipe(
       map((response: RequestToken) => {
         if (response.success) {
-          //let url = 'https://www.themoviedb.org/authenticate/' + response.request_token;
-           //return this.coreService.showBrowser(url);
            return response.request_token;
         }
         else {
@@ -139,6 +138,13 @@ export class AuthService {
       this.userSession = session;
     }
     return this.userSession;
+  }
+
+  logout() {
+    localStorage.clear();
+    this.guestUserSession = null;
+    this.userSession = null;
+    this.sessionID = null;
   }
 
 

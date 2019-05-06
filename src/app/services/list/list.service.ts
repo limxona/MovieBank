@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AccountService } from '../account/account.service';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { UserListResponse, ListDetail } from 'src/app/models/user-list';
+import { UserListResponse, ListDetail, UserList } from 'src/app/models/user-list';
 import { AuthService } from '../auth/auth.service';
 import { CoreService } from '../core/core.service';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ export class ListService {
 
   constructor(private http: HttpClient ,private accountService: AccountService, private authService: AuthService, private coreService: CoreService) { }
 
-  getCreatedLists() {
+  getCreatedLists(): Observable<UserList[]> {
     let accountID = this.accountService.getUser().id;
     let url = '/account/' + accountID + '/lists';
 
@@ -64,7 +64,7 @@ export class ListService {
           if (response.status_code == StatusCode.UPDATED) {
             return true;
           }
-          else if (response.status_code == StatusCode.DELETED) {
+          else {
             return false;
           }
         })
@@ -72,7 +72,7 @@ export class ListService {
     }
   }
 
-  removeMovieFromList(movieID: number | string, listID: number | string) {
+  removeMovieFromList(movieID: number | string, listID: number | string): Observable<boolean> {
 
     let isSessionExist = this.authService.checkUserSession();
     if (!isSessionExist) {
@@ -99,7 +99,7 @@ export class ListService {
 
   }
 
-  createList(name: string, description: string) {
+  createList(name: string, description: string): Observable<boolean> {
     let queryParams: any = {
       session_id: this.authService.getSessionID()
     }

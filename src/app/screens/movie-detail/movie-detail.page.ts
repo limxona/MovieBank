@@ -123,7 +123,7 @@ export class MovieDetailPage implements OnInit {
 
   getMovieCast() {
     this.movieService.getMovieCast(this.movieID).subscribe(d => {
-      let tmpCastList = d.cast as Cast[];
+      let tmpCastList = d;
       this.castList = tmpCastList.length > 10 ? tmpCastList.slice(0, 10) : tmpCastList;
     });
   }

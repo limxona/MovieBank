@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Gender } from 'src/app/models/gender';
+import { Genre, GenreResponse } from 'src/app/models/genre';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GenderService {
+export class GenreService {
 
   constructor(private http: HttpClient) { }
 
 
-  getAllGenders() {
+  getAllGenders(): Observable<Genre[]> {
     return this.http.get("/genre/movie/list").pipe(
-      map((response: any) => {
-        return response.genres as Array<Gender>;
+      map((response: GenreResponse) => {
+        console.log(response);
+        return response.genres;
       })
     );
   }

@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import { Movie, MovieStates, MovieResponse } from 'src/app/models/movie';
 import { TrailerResponse } from 'src/app/models/trailer';
 import { AuthService } from '../auth/auth.service';
+import { Observable } from 'rxjs';
+import { Cast, CastResponse } from 'src/app/models/cast';
 
 
 @Injectable({
@@ -16,11 +18,10 @@ export class MovieService {
   }
 
 
-  getLatestMovies(pageNumber: number) {
+  getLatestMovies(pageNumber: number): Observable<Movie[]> {
     var data = {
       page: pageNumber.toString()
     }
-
     return this.http.get("/movie/latest", { params: data }).pipe(
       map((response: MovieResponse) => {
         return response.results;
@@ -29,7 +30,7 @@ export class MovieService {
   }
 
 
-  getPopularMovies(pageNumber: number) {
+  getPopularMovies(pageNumber: number): Observable<Movie[]> {
     var data = {
       page: pageNumber.toString()
     }
@@ -40,7 +41,7 @@ export class MovieService {
     );
   }
 
-  getTopRatedMovies(pageNumber: number) {
+  getTopRatedMovies(pageNumber: number): Observable<Movie[]> {
     var data = {
       page: pageNumber.toString()
     }
@@ -52,7 +53,7 @@ export class MovieService {
     );
   }
 
-  getTopUpcomingMovies(pageNumber: number) {
+  getTopUpcomingMovies(pageNumber: number): Observable<Movie[]> {
     var data = {
       page: pageNumber.toString()
     }
@@ -64,7 +65,7 @@ export class MovieService {
     );
   }
 
-  getTopNowPlayingMovies(pageNumber: number) {
+  getTopNowPlayingMovies(pageNumber: number): Observable<Movie[]> {
     var data = {
       page: pageNumber.toString()
     }
@@ -76,7 +77,7 @@ export class MovieService {
     );
   }
 
-  searchMovie(searchText: string) {
+  searchMovie(searchText: string): Observable<Movie[]> {
     var data = {
       query: searchText
     }
@@ -88,7 +89,7 @@ export class MovieService {
     );
   }
 
-  getMovieDetail(movieID: string) {
+  getMovieDetail(movieID: string): Observable<Movie> {
     return this.http.get("/movie/" + movieID).pipe(
       map((response: Movie) => {
         return response;
@@ -96,16 +97,16 @@ export class MovieService {
     );
   }
 
-  getMovieCast(movieID: string) {
+  getMovieCast(movieID: string): Observable<Cast[]> {
     let url = '/movie/' + movieID + '/credits';
     return this.http.get(url).pipe(
-      map((response: any) => {
-        return response;
+      map((response: CastResponse) => {
+        return response.cast;
       })
     );
   }
 
-  getSimilarMovies(movieID: string) {
+  getSimilarMovies(movieID: string): Observable<Movie[]> {
     let url = '/movie/' + movieID + '/similar';
     return this.http.get(url).pipe(
       map((response: MovieResponse) => {
@@ -114,7 +115,7 @@ export class MovieService {
     );
   }
 
-  getCategoryMovies(genderID: string) {
+  getCategoryMovies(genderID: string): Observable<Movie[]> {
     var data = {
       with_genres: genderID
     }
@@ -126,7 +127,7 @@ export class MovieService {
     );
   }
 
-  getMovieTrailerURL(movieID: string) {
+  getMovieTrailerURL(movieID: string): Observable<string> {
     //_IqFJLdV13o
     let url = '/movie/' + movieID + '/videos';
     return this.http.get(url).pipe(
@@ -144,7 +145,7 @@ export class MovieService {
     );
   }
 
-  getAccountStateForMovie(movieID: string) {
+  getAccountStateForMovie(movieID: string): Observable<MovieStates> {
 
     let url = '/movie/' + movieID + '/account_states';
     let sessionID = this.authService.getSessionID();
