@@ -23,6 +23,7 @@ export class ProfilePage implements OnInit {
   userLists: UserList[] = [];
   userWatchList: Movie[] = [];
   userFavoriteList: Movie[] = [];
+  private requestToken: string;
   constructor(
     private authService: AuthService,
     private accountService: AccountService,
@@ -46,6 +47,7 @@ export class ProfilePage implements OnInit {
     this.accountService.getAccountDetails().subscribe(d => {
       console.log("Account Detail: ", d);
       this.loggedUser = d;
+      this.isSessionExist = true;
       this.getAccountLists();
     });
   }
@@ -125,6 +127,9 @@ export class ProfilePage implements OnInit {
   }
 
   login() {
+
+    //this.isSessionExist = true;
+
     this.authService.createRequestToken().subscribe((d: any) => {
       console.log('Request Token: ', d);
       if (d != false) {
@@ -137,6 +142,7 @@ export class ProfilePage implements OnInit {
           (error: any) => console.log(error)
         ); */
 
+        this.requestToken = d;
         let url = 'https://www.themoviedb.org/authenticate/' + d;
         this.coreService.showBrowser(url).subscribe((result: any) => {
           //if(result.event === 'opened') console.log('Opened');
@@ -144,7 +150,11 @@ export class ProfilePage implements OnInit {
           //else if(result.event === 'closed') console.log('Closed');
 
           if(result.event === 'closed') {
-            this.createSession(d.requestToken);
+            console.log("Token: ", this.requestToken);
+            
+            setTimeout(() => {
+              this.createSession(this.requestToken);
+            }, 1000);
           }
 
         },
@@ -170,8 +180,15 @@ export class ProfilePage implements OnInit {
   }
 
   createSession(requestToken: string) {
-    this.authService.createSession(requestToken).subscribe(result => {
-
+    return this.authService.createSession(requestToken).subscribe(result => {
+      console.log("Session: ", result);
+      if(result) {
+        setTimeout(() => {
+          this.getAccountDetails();
+          this.checkSession();
+        }, 1000);
+        
+      }
     });
   }
 

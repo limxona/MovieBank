@@ -5,7 +5,7 @@ export interface GuestSession {
 }
 
 export interface UserSession {
-  expires_at: string;
+  expires_at?: string;
   session_id: string;
   success: boolean;
 }

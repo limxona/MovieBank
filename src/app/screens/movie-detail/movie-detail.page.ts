@@ -89,7 +89,7 @@ export class MovieDetailPage implements OnInit {
   }
 
   showMovieTrailer() {
-    this.coreService.showBrowser(this.trailerURL);
+    this.coreService.showBrowser(this.trailerURL).subscribe(result => {  });
   }
 
   shareMovie() {

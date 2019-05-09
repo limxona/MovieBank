@@ -28,7 +28,7 @@ export class CoreService {
       url: url,
       hidden: false,
       animated: false,
-      transition: 'curl',
+      transition: 'slide',
       enterReaderModeIfAvailable: true,
       tintColor: '#ff0000'
     });

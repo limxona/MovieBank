@@ -86,8 +86,9 @@ export class AuthService {
       "request_token": requestToken
     }
     return this.http.post("/authentication/session/new", params).pipe(
-      map((response: any) => {
-        return response;
+      map((response: UserSession) => {
+        localStorage.setItem('sessionID', response.session_id);
+        return response.session_id;
       })
     );
   }
