@@ -36,9 +36,6 @@
     </div>
 
     <div class="account-menu">
-      <!-- <div class="menu-item" [ngClass]="{'active': selectedMenu == 'watchlist'}">
-        <span>Summary</span>
-      </div> -->
 
       <div class="menu-item" [ngClass]="{'active': selectedMenu == 'list'}" (click)="changeTab('list')">
         <span>Lists</span>
@@ -60,13 +57,16 @@
         <div class="add-new-list">
           <ion-icon name="add" (click)="addNewList();"></ion-icon>
         </div>
-        <div class="list" *ngFor="let list of userLists" (click)="showListDetail(list)">
-          <span class="title">
+        <div class="list" *ngFor="let list of userLists">
+          <span class="title" (click)="showListDetail(list)">
             {{list.name}}
           </span>
-          <span class="sub-title">
+          <span class="sub-title" (click)="showListDetail(list)">
             {{list.item_count}} item - {{list.list_type}}
           </span>
+          <div class="action" (click)="deleteList(list)">
+            <ion-icon name="trash"></ion-icon>
+          </div>
         </div>
       </div>
 
@@ -101,9 +101,8 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
-
-
-
+  
 </ion-content>

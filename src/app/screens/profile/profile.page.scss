@@ -131,6 +131,7 @@
             flex-direction: column;
             border-radius: 10px;
             margin-bottom: 10px;
+            position: relative;
 
             .title {
                 color: white;
@@ -141,6 +142,13 @@
                 color: white;
             }
         }
+        .action {
+            position: absolute;
+            bottom: 0px;
+            color: #cd4851;
+            font-size: 25px;
+        }
+
     }
 
     .user-watchlist-content {

@@ -126,6 +126,10 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  private deleteList(list: UserList) {
+    console.log(list);
+  } 
+
   login() {
 
     //this.isSessionExist = true;

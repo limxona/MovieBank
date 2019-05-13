@@ -114,8 +114,22 @@ export class ListService {
     );
   }
 
-  deleteList() {
+  deleteList(list: ListDetail) {
+    let url: string = `/list/${list.id}`;
+    let queryParams: any = {
+      session_id: this.authService.getSessionID()
+    }
 
+    return this.http.delete(url, {params: queryParams}).pipe(
+      map((response: StatusResponse) => {
+        if(response.status_code == StatusCode.UPDATED){
+          return true;
+        }
+        else {
+          return false;
+        }
+      })
+    );
   }
 
   clearList() {
