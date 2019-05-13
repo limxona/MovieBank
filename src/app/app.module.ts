@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -17,6 +17,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { ListPageModule } from './screens/modals/list/list.module';
 import { ListDetailPageModule } from './screens/modals/list-detail/list-detail.module';
 import { AddListPageModule } from './screens/modals/add-list/add-list.module';
+import { CustomErrorHandler } from './core/custom-error-handler';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +38,7 @@ import { AddListPageModule } from './screens/modals/add-list/add-list.module';
     SafariViewController,
     SocialSharing,
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },
+    { provide: ErrorHandler, useClass: CustomErrorHandler },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/account/account.service';
 import { User } from 'src/app/models/user';
-import { UserList } from 'src/app/models/user-list';
+import { UserList, ListDetail } from 'src/app/models/user-list';
 import { Movie } from 'src/app/models/movie';
 import { CoreService } from 'src/app/services/core/core.service';
 import { ModalController } from '@ionic/angular';
@@ -126,8 +126,12 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  private deleteList(list: UserList) {
+  private deleteList(list: ListDetail) {
     console.log(list);
+    this.listService.deleteList(list).subscribe(result => {
+      console.log(result);
+      
+    });
   } 
 
   login() {
