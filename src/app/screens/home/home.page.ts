@@ -3,6 +3,7 @@ import { IonInfiniteScroll } from "@ionic/angular";
 import { MovieService } from "src/app/services/movie/movie.service";
 import { Movie } from "src/app/models/movie";
 import { Observable } from "rxjs";
+import { CoreService } from 'src/app/services/core/core.service';
 
 @Component({
   selector: "app-home",
@@ -15,7 +16,7 @@ export class HomePage implements OnInit {
   movieList: Movie[] = [];
   pageCount: number = 1;
   selectedCategory: string = "popular";
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService, private coreService: CoreService) {}
 
   ngOnInit(): void {
     this.getMovies("popular", 1);
@@ -23,10 +24,12 @@ export class HomePage implements OnInit {
 
   private changeCategory(category: string) {
     this.movieList = [];
+    this.pageCount = 1;
     this.getMovies(category, 1);
   }
 
   private getMovies(category: string, pageNumber: number) {
+    //this.coreService.showLoadingIcon();
     switch (category) {
       case "upcoming":
         this.selectedCategory = "upcoming";

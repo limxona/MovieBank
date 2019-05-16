@@ -136,30 +136,16 @@ export class ProfilePage implements OnInit {
 
   login() {
 
-    //this.isSessionExist = true;
+    this.createSession("31adfdea8606f4232209bd4a99f2cf438b368f93");
 
-    this.authService.createRequestToken().subscribe((d: any) => {
+    /* this.authService.createRequestToken().subscribe((d: any) => {
       console.log('Request Token: ', d);
       if (d != false) {
-        /* d.subscribe((result: any) => {
-          alert(result.event);
-          if (result.event === 'closed') {
-            alert("kapatıldı.");
-          }
-        },
-          (error: any) => console.log(error)
-        ); */
-
         this.requestToken = d;
         let url = 'https://www.themoviedb.org/authenticate/' + d;
         this.coreService.showBrowser(url).subscribe((result: any) => {
-          //if(result.event === 'opened') console.log('Opened');
-          //else if(result.event === 'loaded') console.log('Loaded');
-          //else if(result.event === 'closed') console.log('Closed');
-
           if(result.event === 'closed') {
             console.log("Token: ", this.requestToken);
-            
             setTimeout(() => {
               this.createSession(this.requestToken);
             }, 1000);
@@ -173,16 +159,6 @@ export class ProfilePage implements OnInit {
       else {
         alert("1");
       }
-
-
-    });
-
-    // this.coreService.showBrowser('sada');
-
-    /* let requestToken = localStorage.getItem('requestToken');
-    this.authService.createSession(requestToken).subscribe(d => {
-      console.log(d);
-      localStorage.setItem('sessionID', d.session_id);
     }); */
 
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
 
 @Injectable({
@@ -7,8 +7,10 @@ import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
 })
 export class CoreService {
 
+  private loadingIcon: any;
   constructor(
     private alertController: AlertController,
+    private loadingCtrl: LoadingController,
     private safariViewController: SafariViewController
   ) { }
 
@@ -21,6 +23,25 @@ export class CoreService {
 
     await alert.present();
   }
+
+  async showLoadingIcon() {
+
+    if(!this.loadingIcon) {
+      this.loadingIcon = await this.loadingCtrl.create({
+        translucent: true
+      });
+    }
+    
+    
+    await this.loadingIcon.present();
+  }
+
+  async hideLoadingIcon() {
+    if(this.loadingIcon) {
+      await this.loadingIcon.dismiss();
+    }
+  }
+
 
   showBrowser(url: string) {
 

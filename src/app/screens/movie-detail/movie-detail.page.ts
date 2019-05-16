@@ -43,7 +43,6 @@ export class MovieDetailPage implements OnInit {
       this.getSimilarMovies();
       this.getMovieTrailer();
       this.getAccountStateForMovie();
-
     }, 500);
   }
 
@@ -52,7 +51,6 @@ export class MovieDetailPage implements OnInit {
   }
 
   async addMovieToList() {
-    console.log("asdasd");
     const modal = await this.modalController.create({
       component: ListPage,
       componentProps: {
@@ -89,21 +87,16 @@ export class MovieDetailPage implements OnInit {
   }
 
   showMovieTrailer() {
-    this.coreService.showBrowser(this.trailerURL).subscribe(result => {  });
+    this.coreService.showBrowser(this.trailerURL).subscribe(result => { });
   }
 
   shareMovie() {
-    console.log("share Movie ", this.movie);
     let url = `https://www.themoviedb.org/movie/${this.movie.id}`;
     this.socialSharing.share(this.movie.title, this.movie.overview, null, url).then((d) => {
       console.log(d);
-      // Sharing via email is possible
     }).catch((err) => {
-      // Sharing via email is not possible
       console.log(err);
-
     });
-    
   }
 
   getMovieDetail() {

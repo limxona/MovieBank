@@ -23,4 +23,10 @@
     <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" onError="this.src = '../assets/images/no-image-poster.png'"  *ngFor="let movie of movieList"  [routerLink]="['/tabs/category/movie-detail/', movie.id]" />
   </div> 
 
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreMovies()">
+    <ion-infinite-scroll-content
+      loadingSpinner="circles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>

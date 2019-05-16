@@ -19,10 +19,10 @@ export class MovieService {
 
 
   getLatestMovies(pageNumber: number): Observable<Movie[]> {
-    var data = {
+    var queryParams = {
       page: pageNumber.toString()
     }
-    return this.http.get("/movie/latest", { params: data }).pipe(
+    return this.http.get("/movie/latest", { params: queryParams }).pipe(
       map((response: MovieResponse) => {
         return response.results;
       })
@@ -31,10 +31,10 @@ export class MovieService {
 
 
   getPopularMovies(pageNumber: number): Observable<Movie[]> {
-    var data = {
+    var queryParams = {
       page: pageNumber.toString()
     }
-    return this.http.get("/movie/popular", { params: data }).pipe(
+    return this.http.get("/movie/popular", { params: queryParams }).pipe(
       map((response: MovieResponse) => {
         return response.results;
       })
@@ -42,11 +42,11 @@ export class MovieService {
   }
 
   getTopRatedMovies(pageNumber: number): Observable<Movie[]> {
-    var data = {
+    var queryParams = {
       page: pageNumber.toString()
     }
 
-    return this.http.get("/movie/top_rated", { params: data }).pipe(
+    return this.http.get("/movie/top_rated", { params: queryParams }).pipe(
       map((response: MovieResponse) => {
         return response.results;
       })
@@ -54,11 +54,11 @@ export class MovieService {
   }
 
   getTopUpcomingMovies(pageNumber: number): Observable<Movie[]> {
-    var data = {
+    var queryParams = {
       page: pageNumber.toString()
     }
 
-    return this.http.get("/movie/upcoming", { params: data }).pipe(
+    return this.http.get("/movie/upcoming", { params: queryParams }).pipe(
       map((response: MovieResponse) => {
         return response.results;
       })
@@ -66,11 +66,11 @@ export class MovieService {
   }
 
   getTopNowPlayingMovies(pageNumber: number): Observable<Movie[]> {
-    var data = {
+    var queryParams = {
       page: pageNumber.toString()
     }
 
-    return this.http.get("/movie/now_playing", { params: data }).pipe(
+    return this.http.get("/movie/now_playing", { params: queryParams }).pipe(
       map((response: MovieResponse) => {
         return response.results;
       })
@@ -78,11 +78,11 @@ export class MovieService {
   }
 
   searchMovie(searchText: string): Observable<Movie[]> {
-    var data = {
+    var queryParams = {
       query: searchText
     }
 
-    return this.http.get("/search/movie", { params: data }).pipe(
+    return this.http.get("/search/movie", { params: queryParams }).pipe(
       map((response: MovieResponse) => {
         return response.results;
       })
@@ -115,12 +115,13 @@ export class MovieService {
     );
   }
 
-  getCategoryMovies(genderID: string): Observable<Movie[]> {
-    var data = {
-      with_genres: genderID
+  getCategoryMovies(genderID: string, page: number): Observable<Movie[]> {
+    var queryParams: any = {
+      with_genres: genderID,
+      page: page,
     }
     let url = '/discover/movie';
-    return this.http.get(url, { params: data }).pipe(
+    return this.http.get(url, { params: queryParams }).pipe(
       map((response: MovieResponse) => {
         return response.results;
       })

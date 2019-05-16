@@ -1,24 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-searchbar #searchbar
-      class="testo"
-      placeholder="Search Movie"
-      debounce="1000"
-      showCancelButton
-      cancelButtonText="Cancel"
-      [(ngModel)]="searchText"
-      (ionChange)="searchMovie(searchText)"
-    ></ion-searchbar>
+    <ion-searchbar #searchbar class="testo" placeholder="Search Movie" debounce="1000" showCancelButton
+      cancelButtonText="Cancel" [(ngModel)]="searchText" (ionChange)="searchMovie(searchText)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="movie-list">
-    <div
-      class="movie-content"
-      *ngFor="let movie of movieList"
-      [routerLink]="['/tabs/search/movie-detail/', movie.id]"
-    >
+    <div class="movie-content" *ngFor="let movie of movieList" [routerLink]="['/tabs/search/movie-detail/', movie.id]">
       <div class="movie-image">
         <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" />
       </div>
