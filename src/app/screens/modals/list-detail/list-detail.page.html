@@ -11,21 +11,22 @@
 
 <ion-content>
 
+  <loading-icon *ngIf="!isDataLoaded"></loading-icon>
 
-<div class="movie-list">
-  <div class="list-item" *ngFor="let item of listDetail?.items">
-    <div class="movie-poster">
-      <img src="https://image.tmdb.org/t/p/w500/{{item.poster_path}}" onError="this.src = '../assets/images/no-image-poster.png'" />
-    </div>
-    <div class="movie-info">
-      <span class="title">{{item.title}}</span>
-    </div>
-    <div class="action" (click)="removeMovieFromList(item)">
-      <ion-icon name="trash"></ion-icon>
+  <div class="movie-list">
+    <div class="list-item" *ngFor="let item of listDetail?.items">
+      <div class="movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/{{item.poster_path}}"
+          onError="this.src = '../assets/images/no-image-poster.png'" />
+      </div>
+      <div class="movie-info">
+        <span class="title">{{item.title}}</span>
+      </div>
+      <div class="action" (click)="removeMovieFromList(item)">
+        <ion-icon name="trash"></ion-icon>
+      </div>
     </div>
   </div>
-</div>
 
 
 </ion-content>
-

@@ -16,6 +16,7 @@ export class SearchListPage implements OnInit {
   genderName: string = '';
   movieList: Movie[] = [];
   private pageCount: number = 1;
+  private isDataLoaded: boolean = false;
   constructor(private activatedRoute: ActivatedRoute, private movieService: MovieService) { }
 
   ngOnInit() {
@@ -26,9 +27,9 @@ export class SearchListPage implements OnInit {
 
   getMovies() {
     this.movieService.getCategoryMovies(this.genderID, this.pageCount).subscribe(movieResponse => {
-      console.log("Category Movies: ", movieResponse);
       this.movieList = this.movieList.concat(movieResponse);
       this.infiniteScroll.complete();
+      this.isDataLoaded = true;
     });
   }
 

@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
+
+/* Plugins */
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+
+/* Services */
 import { AuthService } from './services/auth/auth.service';
 
 
@@ -17,7 +20,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     private authService: AuthService
   ) {
-    
+
     this.initializeApp();
   }
 

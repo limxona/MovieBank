@@ -42,9 +42,19 @@ ion-back-button {
     --color: #cd4851 !important;
 }
 
+ion-spinner {
+    --color: white;
+}
+
 
 .toolbar-background-md, .toolbar-background-ios,.toolbar-background-wp {
     background-color: white;
+}
+
+.loading-icon-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 

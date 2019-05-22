@@ -51,6 +51,8 @@
 
     </div>
 
+    <loading-icon *ngIf="!isDataLoaded"></loading-icon>
+
     <div class="menu-content">
 
       <div class="user-list-content" *ngIf="selectedMenu == 'list'">

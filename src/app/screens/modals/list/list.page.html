@@ -11,6 +11,7 @@
 
 <ion-content>
 
+  <loading-icon *ngIf="!isDataLoaded"></loading-icon>
 
   <div class="content">
     <div class="list-item" *ngFor="let item of userLists" [ngClass]="{'selected': item.id == selectedListID}" (click)="selectList(item);">

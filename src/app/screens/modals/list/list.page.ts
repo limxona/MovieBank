@@ -13,6 +13,7 @@ export class ListPage implements OnInit {
 
   private userLists: UserList[] = [];
   private selectedListID: number;
+  private isDataLoaded: boolean = false;
   @Input() movieID: string;
 
   constructor(
@@ -27,9 +28,11 @@ export class ListPage implements OnInit {
   }
 
   getUserLists() {
+    this.isDataLoaded = false;
     this.listService.getCreatedLists().subscribe(d => {
       console.log(d);
       this.userLists = d;
+      this.isDataLoaded = true;
     });
   }
 

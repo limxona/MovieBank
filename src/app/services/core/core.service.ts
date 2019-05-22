@@ -24,21 +24,29 @@ export class CoreService {
     await alert.present();
   }
 
-  async showLoadingIcon() {
+  showLoadingIcon() {
 
     if(!this.loadingIcon) {
-      this.loadingIcon = await this.loadingCtrl.create({
+      this.loadingIcon = this.loadingCtrl.create({
         translucent: true
+      }).then((res) => {
+        res.present().then((r) => {
+          console.log("Present Then: ", r);
+        });
+
+        console.log("Present Before: ", res);
+
       });
     }
     
     
-    await this.loadingIcon.present();
+    //await this.loadingIcon.present();
   }
 
-  async hideLoadingIcon() {
+  hideLoadingIcon() {
+    console.log("Hide Before");
     if(this.loadingIcon) {
-      await this.loadingIcon.dismiss();
+      this.loadingIcon.dismiss();
     }
   }
 

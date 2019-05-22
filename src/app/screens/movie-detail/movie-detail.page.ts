@@ -93,9 +93,7 @@ export class MovieDetailPage implements OnInit {
   shareMovie() {
     let url = `https://www.themoviedb.org/movie/${this.movie.id}`;
     this.socialSharing.share(this.movie.title, this.movie.overview, null, url).then((d) => {
-      console.log(d);
     }).catch((err) => {
-      console.log(err);
     });
   }
 
@@ -110,7 +108,6 @@ export class MovieDetailPage implements OnInit {
       this.isOnWatchlist = d.watchlist;
       this.isFavorite = d.favorite;
       this.rate = d.rated == false ? 0 : d.rated.value / 2;
-      console.log(this.rate);
     });
   }
 

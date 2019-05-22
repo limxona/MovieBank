@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Movie, MovieStates, MovieResponse } from 'src/app/models/movie';
 import { TrailerResponse } from 'src/app/models/trailer';
 import { AuthService } from '../auth/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Cast, CastResponse } from 'src/app/models/cast';
 
 
@@ -85,7 +85,12 @@ export class MovieService {
     return this.http.get("/search/movie", { params: queryParams }).pipe(
       map((response: MovieResponse) => {
         return response.results;
+      }),
+      catchError(err => { 
+        console.log(err);
+        return throwError("err");
       })
+      //catchError(err => of([]))
     );
   }
 

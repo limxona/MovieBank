@@ -1,4 +1,3 @@
-
  <ion-header translucent>
   <ion-toolbar translucent style="--background: #ffffff00;">
     <ion-back-button></ion-back-button>
@@ -7,10 +6,7 @@
 
 <ion-content fullscreen> 
 
-  <!-- <div class="back-button-content" (click)="navigateBack();">
-    <ion-icon name="arrow-back"></ion-icon>
-  </div>
- -->
+  <loading-icon *ngIf="!movie"></loading-icon>
 
   <div *ngIf="movie" class="content">
 
@@ -29,7 +25,6 @@
         <span>{{movie.vote_average}}</span>
       </div>
     </div>
-
 
     <div class="movie-info">
       <div class="movie-title">

@@ -6,6 +6,9 @@
 </ion-header>
 
 <ion-content>
+
+  <loading-icon *ngIf="!isDataLoaded"></loading-icon>
+
   <div class="movie-list">
     <div class="movie-content" *ngFor="let movie of movieList" [routerLink]="['/tabs/search/movie-detail/', movie.id]">
       <div class="movie-image">

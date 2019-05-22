@@ -1,18 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-/* const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: './screens/home/home.module#HomePageModule' },
-]; */
-
 const routes: Routes = [
   { path: '', loadChildren: './screens/tabs/tabs.module#TabsPageModule' },
-  { path: 'search-list', loadChildren: './screens/search-list/search-list.module#SearchListPageModule' },  { path: 'add-list', loadChildren: './screens/modals/add-list/add-list.module#AddListPageModule' },
-  { path: 'settings', loadChildren: './screens/settings/settings.module#SettingsPageModule' },
-
-
-
+  { path: 'search-list', loadChildren: './screens/search-list/search-list.module#SearchListPageModule' },
+  { path: 'add-list', loadChildren: './screens/modals/add-list/add-list.module#AddListPageModule' },
+  { path: 'settings', loadChildren: './screens/settings/settings.module#SettingsPageModule' }
 ];
 
 @NgModule({

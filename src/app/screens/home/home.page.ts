@@ -16,6 +16,7 @@ export class HomePage implements OnInit {
   movieList: Movie[] = [];
   pageCount: number = 1;
   selectedCategory: string = "popular";
+  isDataLoaded: boolean = false;
   constructor(private movieService: MovieService, private coreService: CoreService) {}
 
   ngOnInit(): void {
@@ -29,13 +30,14 @@ export class HomePage implements OnInit {
   }
 
   private getMovies(category: string, pageNumber: number) {
-    //this.coreService.showLoadingIcon();
+    this.isDataLoaded = false;
     switch (category) {
       case "upcoming":
         this.selectedCategory = "upcoming";
         this.movieService.getTopUpcomingMovies(pageNumber).subscribe(movieResponse => {
           this.movieList = this.movieList.concat(movieResponse);
           this.infiniteScroll.complete();
+          this.isDataLoaded = true;
         });
         break;
       case "popular":
@@ -43,6 +45,8 @@ export class HomePage implements OnInit {
         this.movieService.getPopularMovies(pageNumber).subscribe(movieResponse => {
           this.movieList = this.movieList.concat(movieResponse);
           this.infiniteScroll.complete();
+          this.coreService.hideLoadingIcon();
+          this.isDataLoaded = true;
         });
         break;
       case "nowPlaying":
@@ -50,6 +54,7 @@ export class HomePage implements OnInit {
         this.movieService.getTopNowPlayingMovies(pageNumber).subscribe(movieResponse => {
           this.movieList = this.movieList.concat(movieResponse);
           this.infiniteScroll.complete();
+          this.isDataLoaded = true;
         });
         break;
       case "topRated":
@@ -57,6 +62,7 @@ export class HomePage implements OnInit {
         this.movieService.getTopRatedMovies(pageNumber).subscribe(movieResponse => {
           this.movieList = this.movieList.concat(movieResponse);
           this.infiniteScroll.complete();
+          this.isDataLoaded = true;
         });
         break;
       default:

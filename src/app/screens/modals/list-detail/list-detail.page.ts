@@ -13,6 +13,7 @@ export class ListDetailPage implements OnInit {
 
   @Input() userList: UserList;
   private listDetail: ListDetail;
+  private isDataLoaded: boolean = true;
   constructor(private modalController: ModalController, private listService: ListService) { }
 
   ngOnInit() {
@@ -20,8 +21,10 @@ export class ListDetailPage implements OnInit {
   }
 
   private getMovies() {
+    this.isDataLoaded = false;
     this.listService.getListsDetail(this.userList.id).subscribe(result => {
       this.listDetail = result;
+      this.isDataLoaded = true;
     });
   }
 

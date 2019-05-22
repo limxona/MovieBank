@@ -24,6 +24,7 @@ export class ProfilePage implements OnInit {
   userWatchList: Movie[] = [];
   userFavoriteList: Movie[] = [];
   private requestToken: string;
+  private isDataLoaded: boolean = true;
   constructor(
     private authService: AuthService,
     private accountService: AccountService,
@@ -68,20 +69,26 @@ export class ProfilePage implements OnInit {
   }
 
   private getAccountWatchList() {
+    this.isDataLoaded = false;
     this.accountService.getMovieWatchList().subscribe(movieList => {
       this.userWatchList = movieList;
+      this.isDataLoaded = true;
     });
   }
 
   private getAccountLists() {
+    this.isDataLoaded = false;
     this.listService.getCreatedLists().subscribe(list => {
       this.userLists = list;
+      this.isDataLoaded = true;
     });
   }
 
   private getAccountFavoriteMovies() {
+    this.isDataLoaded = false;
     this.accountService.getFavoriteMovies().subscribe(list => {
       this.userFavoriteList = list;
+      this.isDataLoaded = true;
     });
   }
 

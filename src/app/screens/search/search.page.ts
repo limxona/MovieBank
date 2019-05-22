@@ -15,6 +15,7 @@ export class SearchPage implements OnInit {
   searchText: string = '';
   //movieList: Observable<Array<Movie>>;
   movieList: Array<Movie> = [];
+  private isDataLoaded: boolean = true;
   @ViewChild('searchbar') searchbar:IonSearchbar;
 
   constructor(
@@ -24,22 +25,25 @@ export class SearchPage implements OnInit {
 
   ngOnInit() {
     this.getAllGenders();
-    this.searchbar.setFocus();
-    this.keyboard.show();
+    //this.searchbar.setFocus();
+    //this.keyboard.show();
   }
 
   getAllGenders() {
     this.genreService.getAllGenders().subscribe(d => {
-      console.log(d);
+      
     });
   }
 
   searchMovie(word: string){
     let search = word.trim();
-
+    this.isDataLoaded = false;
     this.movieService.searchMovie(search).subscribe(d => {
       this.movieList = d;
-      console.log(d);
+      this.isDataLoaded = true;
+    }, (error: any) => {
+      this.movieList = [];
+      this.isDataLoaded = true;
     });
   }
 
