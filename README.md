@@ -1,6 +1,24 @@
 # Best Movies
 
-This project is developed with Ionic Framework
+Moviebank is an app that you can explore and evaluate more than 28,000 movies. This app is developed with Ionic 4.  
+
+
+## Features
+  - See top rated movies
+  - See popular movies
+  - See upcoming movies
+  - See movie's detail
+  - Rate movie
+  - Add Movie to watch list
+  - Search for movies.
+  - Search movies by genres
+  - Share movie
+
+## Requirements
+  - [Nodejs](https://nodejs.org/en/)
+  - [Apache Cordova](https://cordova.apache.org/)
+  - [Ionic](https://ionicframework.com/)
+
 
 ## Installation
 
