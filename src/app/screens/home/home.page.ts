@@ -1,9 +1,13 @@
+/* Core */
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { IonInfiniteScroll } from "@ionic/angular";
-import { MovieService } from "src/app/services/movie/movie.service";
+
+/* Models */
 import { Movie } from "src/app/models/movie";
-import { Observable } from "rxjs";
+
+/* Services */
 import { CoreService } from 'src/app/services/core/core.service';
+import { MovieService } from "src/app/services/movie/movie.service";
 
 @Component({
   selector: "app-home",
@@ -11,8 +15,8 @@ import { CoreService } from 'src/app/services/core/core.service';
   styleUrls: ["home.page.scss"]
 })
 export class HomePage implements OnInit {
+  
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-  //movieList: Observable<Array<Movie>>;
   movieList: Movie[] = [];
   pageCount: number = 1;
   selectedCategory: string = "popular";

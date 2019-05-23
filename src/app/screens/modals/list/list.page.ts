@@ -1,7 +1,11 @@
+/* Core */
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AccountService } from 'src/app/services/account/account.service';
+
+/* Models */
 import { UserList } from 'src/app/models/user-list';
+
+/* Services */
 import { ListService } from 'src/app/services/list/list.service';
 
 @Component({

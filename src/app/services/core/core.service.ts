@@ -1,5 +1,8 @@
+/* Core */
 import { Injectable } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
+
+/* Plugins */
 import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
 
 @Injectable({

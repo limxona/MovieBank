@@ -1,8 +1,11 @@
+/* Core */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Genre, GenreResponse } from 'src/app/models/genre';
 import { Observable } from 'rxjs';
+
+/* Models */
+import { Genre, GenreResponse } from 'src/app/models/genre';
 
 @Injectable({
   providedIn: 'root'

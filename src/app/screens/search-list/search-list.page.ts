@@ -1,8 +1,13 @@
+/* Core */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieService } from 'src/app/services/movie/movie.service';
-import { Movie } from 'src/app/models/movie';
 import { IonInfiniteScroll } from '@ionic/angular';
+
+/* Services */
+import { MovieService } from 'src/app/services/movie/movie.service';
+
+/* Models */
+import { Movie } from 'src/app/models/movie';
 
 @Component({
   selector: 'app-search-list',

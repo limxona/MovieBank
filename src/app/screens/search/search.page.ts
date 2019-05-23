@@ -1,9 +1,14 @@
+/* Core */
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MovieService } from 'src/app/services/movie/movie.service';
-import { Movie } from 'src/app/models/movie';
-import { GenreService } from 'src/app/services/genre/genre.service';
 import { IonSearchbar } from '@ionic/angular';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+
+/* Servies */
+import { MovieService } from 'src/app/services/movie/movie.service';
+import { GenreService } from 'src/app/services/genre/genre.service';
+
+/* Models */
+import { Movie } from 'src/app/models/movie';
 
 @Component({
   selector: 'app-search',

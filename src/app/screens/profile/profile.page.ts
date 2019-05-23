@@ -1,13 +1,20 @@
+/* Core */
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+
+/* Services */
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AccountService } from 'src/app/services/account/account.service';
+import { CoreService } from 'src/app/services/core/core.service';
+import { ListService } from 'src/app/services/list/list.service';
+
+/* Models */
 import { User } from 'src/app/models/user';
 import { UserList, ListDetail } from 'src/app/models/user-list';
 import { Movie } from 'src/app/models/movie';
-import { CoreService } from 'src/app/services/core/core.service';
-import { ModalController } from '@ionic/angular';
+
+/* Components */
 import { ListDetailPage } from '../modals/list-detail/list-detail.page';
-import { ListService } from 'src/app/services/list/list.service';
 import { AddListPage } from '../modals/add-list/add-list.page';
 
 @Component({
@@ -168,6 +175,13 @@ export class ProfilePage implements OnInit {
       }
     }); */
 
+  }
+
+  logout() {
+    this.authService.logout();
+    if (this.checkSession()) {
+      this.getAccountLists();
+    }
   }
 
   createSession(requestToken: string) {

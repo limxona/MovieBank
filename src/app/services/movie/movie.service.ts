@@ -1,11 +1,16 @@
+/* Core */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+
+/* Models */
 import { Movie, MovieStates, MovieResponse } from 'src/app/models/movie';
 import { TrailerResponse } from 'src/app/models/trailer';
-import { AuthService } from '../auth/auth.service';
-import { Observable, throwError } from 'rxjs';
 import { Cast, CastResponse } from 'src/app/models/cast';
+
+/* Services */
+import { AuthService } from '../auth/auth.service';
 
 
 @Injectable({

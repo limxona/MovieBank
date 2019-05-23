@@ -1,5 +1,8 @@
+/* Core */
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+
+/* Services */
 import { ListService } from 'src/app/services/list/list.service';
 
 @Component({

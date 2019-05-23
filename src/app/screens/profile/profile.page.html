@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="primary"  *ngIf="isSessionExist">
-      <ion-button [routerLink]="['/tabs/profile/settings']">
-        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>Profile</ion-title>

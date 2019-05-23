@@ -1,9 +1,14 @@
+/* Core */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { GuestSession, RequestToken, UserSession } from 'src/app/models/auth';
-import { CoreService } from '../core/core.service';
 import { Observable } from 'rxjs';
+
+/* Models */
+import { GuestSession, RequestToken, UserSession } from 'src/app/models/auth';
+
+/* Services */
+import { CoreService } from '../core/core.service';
 
 @Injectable({
   providedIn: 'root'

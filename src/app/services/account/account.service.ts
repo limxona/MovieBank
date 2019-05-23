@@ -1,12 +1,17 @@
+/* Core */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
-import { Observable, observable } from 'rxjs';
-import { CoreService } from '../core/core.service';
+import { Observable } from 'rxjs';
+
+/* Models */
 import { User } from 'src/app/models/user';
-import { UserListResponse } from 'src/app/models/user-list';
 import { MovieResponse } from 'src/app/models/movie';
+
+/* Services */
+import { AuthService } from '../auth/auth.service';
+import { CoreService } from '../core/core.service';
+
 
 @Injectable({
   providedIn: "root"

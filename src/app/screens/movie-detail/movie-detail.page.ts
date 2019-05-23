@@ -1,14 +1,24 @@
+
+/* Core */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Movie } from 'src/app/models/movie';
-import { Observable } from 'rxjs';
-import { MovieService } from 'src/app/services/movie/movie.service';
-import { Cast } from 'src/app/models/cast';
 import { NavController, ModalController } from '@ionic/angular';
+
+/* Models */
+import { Movie } from 'src/app/models/movie';
+import { Cast } from 'src/app/models/cast';
+
+/* Services */
+import { MovieService } from 'src/app/services/movie/movie.service';
 import { AccountService } from 'src/app/services/account/account.service';
 import { CoreService } from 'src/app/services/core/core.service';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
+/* Components */
 import { ListPage } from '../modals/list/list.page';
+
+/* Plugins */
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
 
 @Component({
   selector: 'app-movie-detail',

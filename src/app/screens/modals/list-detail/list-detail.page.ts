@@ -1,8 +1,13 @@
+/* Core */
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { UserList, ListDetail } from 'src/app/models/user-list';
+
+/* Services */
 import { ListService } from 'src/app/services/list/list.service';
+
+/* Models */
 import { Movie } from 'src/app/models/movie';
+import { UserList, ListDetail } from 'src/app/models/user-list';
 
 @Component({
   selector: 'app-list-detail',

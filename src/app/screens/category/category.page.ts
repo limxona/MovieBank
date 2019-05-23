@@ -1,6 +1,11 @@
+/* Core */
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+
+/* Models */
 import { Genre } from 'src/app/models/genre';
+
+/* Services */
 import { GenreService } from 'src/app/services/genre/genre.service';
 
 @Component({

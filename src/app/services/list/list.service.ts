@@ -1,11 +1,16 @@
+/* Core */
 import { Injectable } from '@angular/core';
-import { AccountService } from '../account/account.service';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { UserListResponse, ListDetail, UserList } from 'src/app/models/user-list';
+import { Observable } from 'rxjs';
+
+/* Services */
 import { AuthService } from '../auth/auth.service';
 import { CoreService } from '../core/core.service';
-import { Observable } from 'rxjs';
+import { AccountService } from '../account/account.service';
+
+/* Models */
+import { UserListResponse, ListDetail, UserList } from 'src/app/models/user-list';
 import { StatusCode, StatusResponse } from 'src/app/models/status';
 
 @Injectable({
