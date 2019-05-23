@@ -22,10 +22,20 @@ Moviebank is an app that you can explore and evaluate more than 28,000 movies. T
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+You'll need a few things before we get started. 
+Make sure you have nodejs installed, if you not. You should install [Nodejs](https://nodejs.org/en/).
 
-```bash
-pip install foobar
+Then run the following command to install Ionic, if you don't have that yet
+```sh
+npm install cordova ionic -g
+```
+Once you clone this repository, run this command to install all needed dependencies from project root
+```sh
+npm install
+```
+After installing the needed dependencies you are done, run this comment to launch app
+```sh
+ionic serve
 ```
 
 ## Usage
