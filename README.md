@@ -42,7 +42,7 @@ Once you clone this repository, run this command to install all needed dependenc
 ```sh
 npm install
 ```
-After installing the needed dependencies you are done, run this comment to launch app on browser.
+After installing the needed dependencies you are done, run this command to launch app on browser.
 ```sh
 ionic serve
 ```
