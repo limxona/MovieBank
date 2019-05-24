@@ -1,6 +1,7 @@
 /* Core */
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 /* Services */
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -16,6 +17,7 @@ import { Movie } from 'src/app/models/movie';
 /* Components */
 import { ListDetailPage } from '../modals/list-detail/list-detail.page';
 import { AddListPage } from '../modals/add-list/add-list.page';
+
 
 @Component({
   selector: 'app-profile',
@@ -37,6 +39,7 @@ export class ProfilePage implements OnInit {
     private accountService: AccountService,
     private listService: ListService,
     private coreService: CoreService,
+    private router: Router,
     private modalController: ModalController) { }
 
   ngOnInit() {
@@ -150,9 +153,9 @@ export class ProfilePage implements OnInit {
 
   login() {
 
-    this.createSession("31adfdea8606f4232209bd4a99f2cf438b368f93");
+    //this.createSession("31adfdea8606f4232209bd4a99f2cf438b368f93");
 
-    /* this.authService.createRequestToken().subscribe((d: any) => {
+    this.authService.createRequestToken().subscribe((d: any) => {
       console.log('Request Token: ', d);
       if (d != false) {
         this.requestToken = d;
@@ -171,9 +174,9 @@ export class ProfilePage implements OnInit {
 
       }
       else {
-        alert("1");
+        //alert("1");
       }
-    }); */
+    });
 
   }
 
