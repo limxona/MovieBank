@@ -46,4 +46,20 @@ After installing the needed dependencies you are done, run this command to launc
 ```sh
 ionic serve
 ```
+Run app on real device 
+
+For Android
+```sh
+ionic cordova platform add android
+ionic cordova run android
+```
+For iOS
+```sh
+ionic cordova platform add ios
+ionic cordova run ios
+```
+
+## Resources
+[The MovieDB API](https://developers.themoviedb.org/3/getting-started/introduction)
+
 
