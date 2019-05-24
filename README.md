@@ -1,6 +1,6 @@
-# Best Movies
+# MovieBank
 
-Moviebank is an app that you can explore and evaluate more than 28,000 movies. This app is developed with Ionic 4.  
+MovieBank is an app that you can explore and evaluate more than 28,000 movies. This app is developed with Ionic 4.  
 
 ## Screenshots
 
@@ -38,11 +38,11 @@ Then run the following command to install Ionic, if you don't have that yet
 ```sh
 npm install cordova ionic -g
 ```
-Once you clone this repository, run this command to install all needed dependencies from project root
+Once you clone this repository, run this command to install all needed dependencies.
 ```sh
 npm install
 ```
-After installing the needed dependencies you are done, run this comment to launch app
+After installing the needed dependencies you are done, run this comment to launch app on browser.
 ```sh
 ionic serve
 ```
