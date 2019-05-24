@@ -2,6 +2,15 @@
 
 Moviebank is an app that you can explore and evaluate more than 28,000 movies. This app is developed with Ionic 4.  
 
+## Screenshots
+
+<img src="/screenshots/image1.png" width="210">&nbsp;
+<img src="/screenshots/image3.png" width="210">&nbsp;
+<img src="/screenshots/image4.png" width="210">&nbsp;
+<img src="/screenshots/image5.png" width="210">&nbsp;
+<img src="/screenshots/image6.png" width="210">&nbsp;
+<img src="/screenshots/image7.png" width="210">&nbsp;
+<img src="/screenshots/image8.png" width="210">&nbsp;
 
 ## Features
   - See top rated movies
